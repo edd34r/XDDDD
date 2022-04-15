@@ -24,6 +24,8 @@ class SUtil
     private static var grantedPermsList:Array<Permissions> = AndroidTools.getGrantedPermissions();  
     #end
 
+    private static var getIaPath:String = lime.system.System.applicationStorageDirectory;
+
     static public function getPath():String
     {
     	#if android
@@ -33,7 +35,7 @@ class SUtil
         } 
         else 
         {
-            aDir = sPath + "/" + "." + Application.current.meta.get("file") + "/files/";         
+            aDir = sPath + "/" + "Android/data/" + Application.current.meta.get("packageName") + "/files";         
         }
         return aDir;
         #else
@@ -58,12 +60,12 @@ class SUtil
             }
         }
 
-        if (!FileSystem.exists(sPath + "/" + "." + Application.current.meta.get("file"))){
-            FileSystem.createDirectory(sPath + "/" + "." + Application.current.meta.get("file"));
+        if (!FileSystem.exists(sPath + "/" + "Android/data/" + Application.current.meta.get("packageName"))){
+            FileSystem.createDirectory(sPath + "/" + "Android/data/" + "." + Application.current.meta.get("packageName"));
         }
 
-        if (!FileSystem.exists(sPath + "/" + "." + Application.current.meta.get("file") + "/files")){
-            FileSystem.createDirectory(sPath + "/" + "." + Application.current.meta.get("file") + "/files");
+        if (!FileSystem.exists(sPath + "/" + "Android/data/" + Application.current.meta.get("packageName") + "/files")){
+            FileSystem.createDirectory(sPath + "/" + "Android/data/" + Application.current.meta.get("packageName") + "/files");
         }
 
         if (!FileSystem.exists(SUtil.getPath() + "log")){
@@ -75,13 +77,11 @@ class SUtil
         }
 
         if (!FileSystem.exists(SUtil.getPath() + "assets")){
-            SUtil.applicationAlert("Instructions:", "You have to copy assets/assets from apk to your internal storage app directory " + "( here " + SUtil.getPath() + " )" + "if you hadn't have Zarhiver Downloaded, download it and enable the show hidden files option to have the folder visible" + "\n" + "Press Ok To Close The App");
-            flash.system.System.exit(0);
+            FileSystem.createDirectory(SUtil.getPath() + "assets");
         }
-        
-        if (!FileSystem.exists(SUtil.getPath() + "mods")){
-            SUtil.applicationAlert("Instructions:", "You have to copy assets/mods from apk to your internal storage app directory " + "( here " + SUtil.getPath() + " )" + "if you hadn't have Zarhiver Downloaded, download it and enable the show hidden files option to have the folder visible" + "\n" + "Press Ok To Close The App");
-            flash.system.System.exit(0);
+
+        if (!FileSystem.exists(SUtil.getPath() + "assets/replays")){
+            FileSystem.createDirectory(SUtil.getPath() + "assets/replays");
         }
         #end
     }

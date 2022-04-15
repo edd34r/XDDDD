@@ -94,7 +94,7 @@
 	<haxelib name="flixel-ui" />
 	<haxelib name="faxe" if='switch'/>
 	<haxelib name="discord_rpc" if="desktop"/>
-	<haxelib name="linc_luajit" if="desktop || android"/>
+	<haxelib name="linc_luajit" if="cpp"/>
     <haxelib name="extension-videoview" if="android"/>
     <haxelib name="AndroidTools" if="android"/>
 

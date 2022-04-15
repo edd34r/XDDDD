@@ -262,12 +262,12 @@ class StoryMenuState extends MusicBeatState
 		{
 			if (!selectedWeek)
 			{
-				if (FlxG.keys.justPressed.UP)
+				if (controls.UP_P)
 				{
 					changeWeek(-1);
 				}
 
-				if (FlxG.keys.justPressed.DOWN)
+				if (controls.DOWN_P)
 				{
 					changeWeek(1);
 				}

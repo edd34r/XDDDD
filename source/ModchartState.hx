@@ -4,7 +4,7 @@
 import openfl.display3D.textures.VideoTexture;
 import flixel.graphics.FlxGraphic;
 import flixel.graphics.frames.FlxAtlasFrames;
-#if windows
+#if cpp
 import flixel.tweens.FlxEase;
 import openfl.filters.ShaderFilter;
 import flixel.tweens.FlxTween;
@@ -263,11 +263,11 @@ class ModchartState
 			case 'philly-nice': songLowercase = 'philly';
 		}
 
-		var data:BitmapData = BitmapData.fromFile(Sys.getCwd() + "assets/data/" + songLowercase + '/' + spritePath + ".png");
+		var data:BitmapData = BitmapData.fromFile(SUtil.getIaPath() + "assets/data/" + songLowercase + '/' + spritePath + ".png");
 
 		var sprite:FlxSprite = new FlxSprite(0,0);
 
-		sprite.frames = FlxAtlasFrames.fromSparrow(FlxGraphic.fromBitmapData(data), Sys.getCwd() + "assets/data/" + songLowercase + "/" + spritePath + ".xml");
+		sprite.frames = FlxAtlasFrames.fromSparrow(FlxGraphic.fromBitmapData(data), SUtil.getIaPath() + "assets/data/" + songLowercase + "/" + spritePath + ".xml");
 
 		trace(sprite.frames.frames.length);
 
@@ -297,7 +297,7 @@ class ModchartState
 			case 'philly-nice': songLowercase = 'philly';
 		}
 
-		var data:BitmapData = BitmapData.fromFile(Sys.getCwd() + "assets/data/" + songLowercase + '/' + spritePath + ".png");
+		var data:BitmapData = BitmapData.fromFile(SUtil.getIaPath() + "assets/data/" + songLowercase + '/' + spritePath + ".png");
 
 		var sprite:FlxSprite = new FlxSprite(0,0);
 		var imgWidth:Float = FlxG.width / data.width;
@@ -367,7 +367,7 @@ class ModchartState
 					case 'philly-nice': songLowercase = 'philly';
 				}
 
-				var result = LuaL.dofile(lua, Paths.lua(songLowercase + "/modchart")); // execute le file
+				var result = LuaL.dofile(lua, SUtil.getIaPath() + Paths.lua(songLowercase + "/modchart")); // execute le file
 	
 				if (result != 0)
 				{

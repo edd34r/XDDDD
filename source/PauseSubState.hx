@@ -2,7 +2,7 @@ package;
 
 import flixel.input.gamepad.FlxGamepad;
 import openfl.Lib;
-#if windows
+#if cpp
 import llua.Lua;
 #end
 import Controls.Control;
@@ -33,13 +33,6 @@ class PauseSubState extends MusicBeatSubstate
 	public function new(x:Float, y:Float)
 	{
 		super();
-
-		if (PlayState.instance.useVideo)
-		{
-			menuItems.remove("Resume");
-			if (GlobalVideo.get().playing)
-				GlobalVideo.get().pause();
-		}
 
 		pauseMusic = new FlxSound().loadEmbedded(Paths.music('breakfast'), true, true);
 		pauseMusic.volume = 0;
@@ -82,8 +75,8 @@ class PauseSubState extends MusicBeatSubstate
 		perSongOffset.scrollFactor.set();
 		perSongOffset.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		
-		#if cpp
-			add(perSongOffset);
+		#if sys
+		add(perSongOffset);
 		#end
 
 		for (i in 0...menuItems.length)
@@ -132,7 +125,8 @@ class PauseSubState extends MusicBeatSubstate
 			case 'dad-battle': songLowercase = 'dadbattle';
 			case 'philly-nice': songLowercase = 'philly';
 		}
-		var songPath = 'assets/data/' + songLowercase + '/';
+
+		var songPath = SUtil.getPath() + 'assets/data/' + songLowercase + '/';
 
 		if (upP)
 		{
@@ -217,7 +211,7 @@ class PauseSubState extends MusicBeatSubstate
 						FlxG.save.data.downscroll = false;
 					}
 					PlayState.loadRep = false;
-					#if windows
+					#if cpp
 					if (PlayState.luaModchart != null)
 					{
 						PlayState.luaModchart.die();
