@@ -144,22 +144,6 @@ class OptionsMenu extends MusicBeatState
 				
 				changeSelection(curSelected);
 			}
-
-			var gamepad:FlxGamepad = FlxG.gamepads.lastActive;
-
-			if (gamepad != null)
-			{
-				if (gamepad.justPressed.DPAD_UP)
-				{
-					FlxG.sound.play(Paths.sound('scrollMenu'));
-					changeSelection(-1);
-				}
-				if (gamepad.justPressed.DPAD_DOWN)
-				{
-					FlxG.sound.play(Paths.sound('scrollMenu'));
-					changeSelection(1);
-				}
-			}
 			
 			if (FlxG.keys.justPressed.UP)
 				changeSelection(-1);
@@ -261,11 +245,7 @@ class OptionsMenu extends MusicBeatState
 	var isSettingControl:Bool = false;
 
 	function changeSelection(change:Int = 0)
-	{
-		#if !switch
-		// NGio.logEvent("Fresh");
-		#end
-		
+	{		
 		FlxG.sound.play(Paths.sound("scrollMenu"), 0.4);
 
 		curSelected += change;

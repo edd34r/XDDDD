@@ -80,7 +80,7 @@ class Caching extends MusicBeatState
 
     function cache()
     {
-
+        #if (!andoid || !linux)
         var images = [];
         var music = [];
 
@@ -121,6 +121,7 @@ class Caching extends MusicBeatState
         }
 
         trace("Finished caching...");
+        #end
 
         FlxG.switchState(new TitleState());
     }

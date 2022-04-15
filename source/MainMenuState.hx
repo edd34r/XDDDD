@@ -13,7 +13,6 @@ import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
-import io.newgrounds.NG;
 import lime.app.Application;
 
 #if windows
@@ -183,45 +182,24 @@ class MainMenuState extends MusicBeatState
 		{
 
 			if (optionShit[curSelected] == 'story')
-				{
-					soul.x = -84;
-					soul.y = -18;
-				}
-				if (optionShit[curSelected] == 'freeplay')
-				{
-					soul.x = -196.8;
-					soul.y = 135.75;
-				}
-				if (optionShit[curSelected] == 'options')
-				{
-					soul.x = -260.85;
-					soul.y = 321.05;
-				}
-				if (optionShit[curSelected] == 'credits')
-				{
-					soul.x = -279.2;
-					soul.y = 472.5;
-				}
-
-
-
-
-
-
-			var gamepad:FlxGamepad = FlxG.gamepads.lastActive;
-
-			if (gamepad != null)
 			{
-				if (gamepad.justPressed.DPAD_UP)
-				{
-					FlxG.sound.play(Paths.sound('scrollMenu'));
-					changeItem(-1);
-				}
-				if (gamepad.justPressed.DPAD_DOWN)
-				{
-					FlxG.sound.play(Paths.sound('scrollMenu'));
-					changeItem(1);
-				}
+				soul.x = -84;
+				soul.y = -18;
+			}
+			if (optionShit[curSelected] == 'freeplay')
+			{
+				soul.x = -196.8;
+				soul.y = 135.75;
+			}
+			if (optionShit[curSelected] == 'options')
+			{
+				soul.x = -260.85;
+				soul.y = 321.05;
+			}
+			if (optionShit[curSelected] == 'credits')
+			{
+				soul.x = -279.2;
+				soul.y = 472.5;
 			}
 
 			if (FlxG.keys.justPressed.UP)
@@ -251,8 +229,6 @@ class MainMenuState extends MusicBeatState
 				{
 					selectedSomethin = true;
 					FlxG.sound.play(Paths.sound('confirmMenu'));
-					
-					
 
 					menuItems.forEach(function(spr:FlxSprite)
 					{
@@ -318,8 +294,6 @@ class MainMenuState extends MusicBeatState
 
 	function changeItem(huh:Int = 0)
 	{
-
-
 		if (finishedFunnyMove)
 		{
 			curSelected += huh;
@@ -329,21 +303,19 @@ class MainMenuState extends MusicBeatState
 			if (curSelected < 0)
 				curSelected = menuItems.length - 1;
 
-
-		
-		menuItems.forEach(function(spr:FlxSprite)
-		{
-			spr.animation.play('idle');
-
-			if (spr.ID == curSelected && finishedFunnyMove)
+			menuItems.forEach(function(spr:FlxSprite)
 			{
-				spr.animation.play('selected');
-				camFollow.setPosition(spr.getGraphicMidpoint().x, spr.getGraphicMidpoint().y);
-				
-			}
+				spr.animation.play('idle');
 
-			spr.updateHitbox();
-		});
+				if (spr.ID == curSelected && finishedFunnyMove)
+				{
+					spr.animation.play('selected');
+					camFollow.setPosition(spr.getGraphicMidpoint().x, spr.getGraphicMidpoint().y);
+					
+				}
+
+				spr.updateHitbox();
+			});
+		}
 	}
-}
 }

@@ -59,7 +59,8 @@ class MP4Handler
 		nc.addEventListener("netStatus", netConnection_onNetStatus);
 
 		netStream.play(path);
-		#else
+		
+		#elseif windows
 		finishCallback = voidCallback;
 
 		vlcBitmap = new VlcBitmap();
@@ -95,7 +96,7 @@ class MP4Handler
 		#end
 	}
 
-	#if desktop
+	#if windows
 	function checkFile(fileName:String):String
 	{
 		var pDir = "";
@@ -153,7 +154,7 @@ class MP4Handler
 	#end
 
 	/////////////////////////////////////////////////////////////////////////////////////
-
+	#if html5
 	function client_onMetaData(path)
 	{
 		video.attachNetStream(netStream);
@@ -169,10 +170,14 @@ class MP4Handler
 			finishVideo();
 		}
 	}
+	#end
+
 
 	function finishVideo()
 	{
+		#if html5
 		netStream.dispose();
+		#end
 
 		if (FlxG.game.contains(video))
 		{
@@ -184,7 +189,6 @@ class MP4Handler
 			finishCallback();
 		}
 	}
-
 	// old html5 player
 	/*
 		var nc:NetConnection = new NetConnection();
