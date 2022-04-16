@@ -1814,7 +1814,7 @@ class PlayState extends MusicBeatState
 		var playerCounter:Int = 0;
 
 		// Per song offset check
-		#if sys
+		#if windows
 			// pre lowercasing the song name (generateSong)
 			var songLowercase = StringTools.replace(PlayState.SONG.song, " ", "-").toLowerCase();
 				switch (songLowercase) {
@@ -2309,75 +2309,78 @@ class PlayState extends MusicBeatState
 
 
 		//bf slash mechanic in d.i.e
-		if (FlxG.keys.justPressed.SPACE #if android || _virtualpad.buttonD.justPressed #end && (SONG.song.toLowerCase() == 'anthropophobia'))
+		if (SONG.song.toLowerCase() == 'anthropophobia')
 		{
-			attack.visible = false;
-
-			boyfriend.playAnim("slash");
-
-			new FlxTimer().start(1, function(swagTimer:FlxTimer)
-				{
-					isAttacking = false;
-				});
-
-			if (isAttacking == false)
+			if (FlxG.keys.justPressed.SPACE #if android || _virtualpad.buttonD.justPressed #end)
 			{
-				if (canHit == true)
-				{
-					canHit = false;
-					isAttacking = true;
+				attack.visible = false;
 
-					FlxG.sound.play(Paths.sound('slash_effect'));
+				boyfriend.playAnim("slash");
 
-					FlxG.camera.shake(0.025, 0.1, null, true, FlxAxes.XY);
-
-					if(isStoryMode)
+				new FlxTimer().start(1, function(swagTimer:FlxTimer)
 					{
-						attackedSans = true;
-					}
-					hit.alpha = 1;
-					health += 4;
-					hit.visible = true;
-
-					new FlxTimer().start(0.5, function(swagTimer:FlxTimer)
-					{
-						new FlxTimer().start(0.01, function(swagTimer:FlxTimer)
-						{
-							hit.alpha -= 0.01;
-
-							if (hit.alpha > 0)
-							{
-								swagTimer.reset();
-							}
-							
-						});
+						isAttacking = false;
 					});
 
-					
-
-				} 
-				else
+				if (isAttacking == false)
 				{
-					miss.alpha = 1;
-					miss.visible = true;
-					isAttacking = true;
-
-					new FlxTimer().start(0.5, function(swagTimer:FlxTimer)
+					if (canHit == true)
 					{
+						canHit = false;
+						isAttacking = true;
 
-						new FlxTimer().start(0.01, function(swagTimer:FlxTimer)
+						FlxG.sound.play(Paths.sound('slash_effect'));
+
+						FlxG.camera.shake(0.025, 0.1, null, true, FlxAxes.XY);
+
+						if(isStoryMode)
 						{
-							miss.alpha -= 0.01;
+							attackedSans = true;
+						}
+						hit.alpha = 1;
+						health += 4;
+						hit.visible = true;
 
-							if (miss.alpha > 0)
+						new FlxTimer().start(0.5, function(swagTimer:FlxTimer)
+						{
+							new FlxTimer().start(0.01, function(swagTimer:FlxTimer)
 							{
-								swagTimer.reset();
-							}
-							
+								hit.alpha -= 0.01;
+
+								if (hit.alpha > 0)
+								{
+									swagTimer.reset();
+								}
+								
+							});
 						});
 
-					});
-				} 
+						
+
+					} 
+					else
+					{
+						miss.alpha = 1;
+						miss.visible = true;
+						isAttacking = true;
+
+						new FlxTimer().start(0.5, function(swagTimer:FlxTimer)
+						{
+
+							new FlxTimer().start(0.01, function(swagTimer:FlxTimer)
+							{
+								miss.alpha -= 0.01;
+
+								if (miss.alpha > 0)
+								{
+									swagTimer.reset();
+								}
+								
+							});
+
+						});
+					} 
+				}
 			}
 		}
 

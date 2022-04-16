@@ -75,7 +75,7 @@ class PauseSubState extends MusicBeatSubstate
 		perSongOffset.scrollFactor.set();
 		perSongOffset.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		
-		#if sys
+		#if windows
 		add(perSongOffset);
 		#end
 
@@ -92,7 +92,7 @@ class PauseSubState extends MusicBeatSubstate
 		cameras = [FlxG.cameras.list[FlxG.cameras.list.length - 1]];
 
         #if android
-        addVirtualPad(FULL, A);
+        addVirtualPad(UP_DOWN, A);
         addPadCamera();
         #end
 	}
@@ -129,7 +129,7 @@ class PauseSubState extends MusicBeatSubstate
 			changeSelection(1);
 		}
 		
-		#if sys
+		#if windows
 			else if (leftP)
 			{
 				oldOffset = PlayState.songOffset;
