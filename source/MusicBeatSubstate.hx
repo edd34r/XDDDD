@@ -34,7 +34,7 @@ class MusicBeatSubstate extends FlxSubState
 	public function addVirtualPad(?DPad:FlxDPadMode, ?Action:FlxActionMode) {
 		_virtualpad = new FlxVirtualPad(DPad, Action, 0.75, true);
 		add(_virtualpad);
-		controls.setVirtualPadUI(_virtualpad, DPad, Action);
+		controls.setVirtualPad(_virtualpad, DPad, Action);
 		trackedinputs = controls.trackedinputs;
 		controls.trackedinputs = [];
 	}
