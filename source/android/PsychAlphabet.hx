@@ -198,7 +198,7 @@ class PsychAlphabet extends FlxSpriteGroup
 	var xPos:Float = 0;
 	public var curRow:Int = 0;
 	var dialogueSound:FlxSound = null;
-	private static var soundDialog:Sound = null;
+	private static var soundDialog:String = null;
 	var consecutiveSpaces:Int = 0;
 	public static function setDialogueSound(name:String = '')
 	{
@@ -217,7 +217,7 @@ class PsychAlphabet extends FlxSpriteGroup
 
 		if(soundDialog == null)
 		{
-			Alphabet.setDialogueSound();
+			PsychAlphabet.setDialogueSound();
 		}
 
 		if(speed <= 0) {
@@ -395,7 +395,7 @@ class AlphaCharacter extends FlxSprite
 		setGraphicSize(Std.int(width * textSize));
 		updateHitbox();
 		this.textSize = textSize;
-		antialiasing = ClientPrefs.globalAntialiasing;
+		antialiasing = true;
 	}
 
 	public function createBoldLetter(letter:String)

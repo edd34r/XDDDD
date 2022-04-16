@@ -79,7 +79,7 @@ class MusicBeatState extends FlxUIState
 
 		androidc.visible = false;
 
-		if (SONG.song.toLowerCase() == 'anthropophobia')
+		if (PlayState.SONG.song.toLowerCase() == 'anthropophobia')
 		{
 			_virtualpad = new FlxVirtualPad(NONE, D, 0.75, true);
 			_virtualpad.cameras = [camcontrol];

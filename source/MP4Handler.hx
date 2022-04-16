@@ -196,12 +196,12 @@ class MP4Handler
 	{
 		#if html5
 		netStream.dispose();
-		#end
 
 		if (FlxG.game.contains(video))
 		{
 			FlxG.game.removeChild(video);
 		}
+		#end
 
 		if (finishCallback != null)
 		{
