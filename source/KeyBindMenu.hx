@@ -158,33 +158,6 @@ class KeyBindMenu extends MusicBeatSubstate
                 state = "waiting";
 
             case "waiting":
-                if (gamepad != null && KeyBinds.gamepad) // GP Logic
-                {
-                    if(controls.BACK){ // just in case you get stuck
-                        gpKeys[curSelected] = tempKey;
-                        state = "select";
-                        FlxG.sound.play(Paths.sound('confirmMenu'));
-                    }
-
-                    if (gamepad.justPressed.START)
-                    {
-                        addKeyGamepad(defaultKeys[curSelected]);
-                        save();
-                        state = "select";
-                    }
-
-                    if (gamepad.justPressed.ANY)
-                    {
-                        trace(gamepad.firstJustPressedID());
-                        addKeyGamepad(gamepad.firstJustPressedID());
-                        save();
-                        state = "select";
-                        textUpdate();
-                    }
-
-                }
-                else
-                {
                     if(controls.BACK){
                         keys[curSelected] = tempKey;
                         state = "select";
@@ -200,9 +173,6 @@ class KeyBindMenu extends MusicBeatSubstate
                         save();
                         state = "select";
                     }
-                }
-
-
             case "exiting":
 
 
