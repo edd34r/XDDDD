@@ -1476,7 +1476,7 @@ class PlayState extends MusicBeatState
 		{
 			if (deathCounter <= 0)
 			{
-				switch (StringTools.replace(curSong," ", "-").toLowerCase())
+				switch (curSong.toLowerCase())
 				{
 					case 'drowning' | 'd.i.e':
 						dialogueShit(doof);
@@ -1514,8 +1514,10 @@ class PlayState extends MusicBeatState
 
 	function playCutscene(videoPlaying:String,dialogueBox:DialogueBox):Void
 	{
-                var video = new FlxVideo(Paths.video(videoPlaying));
-	        video.finishCallback = function()
+		var black:FlxSprite = new FlxSprite(-200, -200).makeGraphic(FlxG.width * 2, FlxG.height * 2, FlxColor.BLACK);
+		black.scrollFactor.set();
+		add(black);
+		new FlxVideo(Paths.video(videoPlaying)).finishCallback = function()
 		{
 			if (dialogueBox != null)
 			{
@@ -1523,17 +1525,19 @@ class PlayState extends MusicBeatState
 				add(dialogueBox);
 			}
 			else
-				startCountdown();						
-		}
+				startCountdown();
+		};
 	}
 
 	function playCutscene2(videoPlaying:String):Void
 	{
-                var video = new FlxVideo(Paths.video(videoPlaying));
-	        video.finishCallback = function()
+		var black:FlxSprite = new FlxSprite(-200, -200).makeGraphic(FlxG.width * 2, FlxG.height * 2, FlxColor.BLACK);
+		black.scrollFactor.set();
+		add(black);
+		new FlxVideo(Paths.video(videoPlaying)).finishCallback = function()
 		{
-			LoadingState.loadAndSwitchState(new PlayState());						
-		}
+			LoadingState.loadAndSwitchState(new PlayState());
+		};
 	}
 
 	function dialogueShit(?dialogueBox:DialogueBox):Void
