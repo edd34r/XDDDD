@@ -14,7 +14,6 @@ import flixel.FlxBasic;
 import flixel.FlxG;
 
 class FlxVideo extends FlxBasic {
-	#if VIDEOS_ALLOWED
 	public var finishCallback:Void->Void = null;
 	
 	#if desktop
@@ -51,7 +50,7 @@ class FlxVideo extends FlxBasic {
 
 	        #elseif android
 
-                VideoView.playVideo(AndroidTools.getFileUrl(name));
+                VideoView.playVideo('file:///android_asset/' + name);
                 VideoView.onCompletion = function(){
 		        if (finishCallback != null){
 			        finishCallback();
@@ -140,6 +139,5 @@ class FlxVideo extends FlxBasic {
 				finishCallback();
 			}
 		}
-	#end
 	#end
 }
