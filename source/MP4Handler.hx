@@ -73,7 +73,7 @@ class MP4Handler
 
 		#elseif android
 
-		VideoView.playVideo('file:///android_asset/' + path));
+		VideoView.playVideo('file:///android_asset/' + path);
 		VideoView.onCompletion = function(){
 			if (finishCallback != null){
 				finishCallback();
