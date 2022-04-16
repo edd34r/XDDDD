@@ -33,8 +33,7 @@ class MusicBeatState extends FlxUIState
 	#if android
 	var _virtualpad:FlxVirtualPad;
 	var androidc:AndroidControls;
-	var trackedinputsUI:Array<FlxActionInput> = [];
-	var trackedinputsNOTES:Array<FlxActionInput> = [];
+	var trackedinputs:Array<FlxActionInput> = [];
 	#end
 	
 	#if android
@@ -42,7 +41,7 @@ class MusicBeatState extends FlxUIState
 		_virtualpad = new FlxVirtualPad(DPad, Action, 0.75, true);
 		add(_virtualpad);
 		controls.setVirtualPad(_virtualpad, DPad, Action);
-		trackedinputsUI = controls.trackedinputs;
+		trackedinputs = controls.trackedinputs;
 		controls.trackedinputs = [];
 	}
 	#end
