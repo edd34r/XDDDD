@@ -104,11 +104,6 @@ class PauseSubState extends MusicBeatSubstate
 
 		super.update(elapsed);
 
-		if (PlayState.instance.useVideo)
-			menuItems.remove('Resume');
-
-		var gamepad:FlxGamepad = FlxG.gamepads.lastActive;
-
 		var upP = controls.UP_P;
 		var downP = controls.DOWN_P;
 		var leftP = controls.LEFT_P;
