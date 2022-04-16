@@ -96,7 +96,7 @@
 	<haxelib name="discord_rpc" if="desktop"/>
 	<haxelib name="linc_luajit" if="cpp"/>
     <haxelib name="extension-videoview" if="android"/>
-    <haxelib name="AndroidTools" if="android"/>
+    <haxelib name="extension-androidtools" if="android"/>
 
     <config:android permission="android.permission.READ_EXTERNAL_STORAGE" if="android"/>
     <config:android permission="android.permission.WRITE_EXTERNAL_STORAGE" if="android"/>
