@@ -44,7 +44,6 @@ class MP4Handler
 	{
 		finishCallback = voidCallback;
 
-		#if html5
 		FlxG.autoPause = false;
 
 		if (FlxG.sound.music != null)
@@ -55,6 +54,7 @@ class MP4Handler
 		if (callback != null)
 			finishCallback = callback;
 
+		#if html5
 		video = new Video();
 		video.x = 0;
 		video.y = 0;
@@ -189,36 +189,20 @@ class MP4Handler
 			finishVideo();
 		}
 	}
-	#end
-
 
 	function finishVideo()
 	{
-		#if html5
 		netStream.dispose();
 
 		if (FlxG.game.contains(video))
 		{
 			FlxG.game.removeChild(video);
 		}
-		#end
 
 		if (finishCallback != null)
 		{
 			finishCallback();
 		}
 	}
-	// old html5 player
-	/*
-		var nc:NetConnection = new NetConnection();
-		nc.connect(null);
-		var ns:NetStream = new NetStream(nc);
-		var myVideo:Video = new Video();
-		myVideo.width = FlxG.width;
-		myVideo.height = FlxG.height;
-		myVideo.attachNetStream(ns);
-		ns.play(path);
-		return myVideo;
-		ns.close();
-	 */
+	#end
 }
