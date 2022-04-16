@@ -27,8 +27,7 @@ class MusicBeatSubstate extends FlxSubState
 
 	#if android
 	var _virtualpad:FlxVirtualPad;
-	var trackedinputsUI:Array<FlxActionInput> = [];
-	var trackedinputsNOTES:Array<FlxActionInput> = [];
+	var trackedinputs:Array<FlxActionInput> = [];
 	#end
 	
 	#if android
