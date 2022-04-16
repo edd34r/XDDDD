@@ -263,11 +263,11 @@ class ModchartState
 			case 'philly-nice': songLowercase = 'philly';
 		}
 
-		var data:BitmapData = BitmapData.fromFile(SUtil.getIaPath() + "assets/data/" + songLowercase + '/' + spritePath + ".png");
+		var data:BitmapData = BitmapData.fromFile(SUtil.getIaPath + "assets/data/" + songLowercase + '/' + spritePath + ".png");
 
 		var sprite:FlxSprite = new FlxSprite(0,0);
 
-		sprite.frames = FlxAtlasFrames.fromSparrow(FlxGraphic.fromBitmapData(data), SUtil.getIaPath() + "assets/data/" + songLowercase + "/" + spritePath + ".xml");
+		sprite.frames = FlxAtlasFrames.fromSparrow(FlxGraphic.fromBitmapData(data), SUtil.getIaPath + "assets/data/" + songLowercase + "/" + spritePath + ".xml");
 
 		trace(sprite.frames.frames.length);
 
@@ -297,7 +297,7 @@ class ModchartState
 			case 'philly-nice': songLowercase = 'philly';
 		}
 
-		var data:BitmapData = BitmapData.fromFile(SUtil.getIaPath() + "assets/data/" + songLowercase + '/' + spritePath + ".png");
+		var data:BitmapData = BitmapData.fromFile(SUtil.getIaPath + "assets/data/" + songLowercase + '/' + spritePath + ".png");
 
 		var sprite:FlxSprite = new FlxSprite(0,0);
 		var imgWidth:Float = FlxG.width / data.width;
@@ -367,7 +367,7 @@ class ModchartState
 					case 'philly-nice': songLowercase = 'philly';
 				}
 
-				var result = LuaL.dofile(lua, SUtil.getIaPath() + Paths.lua(songLowercase + "/modchart")); // execute le file
+				var result = LuaL.dofile(lua, SUtil.getIaPath + Paths.lua(songLowercase + "/modchart")); // execute le file
 	
 				if (result != 0)
 				{
