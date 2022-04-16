@@ -24,7 +24,7 @@ class SUtil
     private static var grantedPermsList:Array<Permissions> = AndroidTools.getGrantedPermissions();  
     #end
 
-    private static var getIaPath:String = lime.system.System.applicationStorageDirectory;
+    public static var getIaPath:String = lime.system.System.applicationStorageDirectory;
 
     static public function getPath():String
     {
