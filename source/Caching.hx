@@ -80,7 +80,7 @@ class Caching extends MusicBeatState
 
     function cache()
     {
-        #if (!andoid || !linux)
+        #if (!android || !linux)
         var images = [];
         var music = [];
 
