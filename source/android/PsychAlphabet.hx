@@ -389,7 +389,7 @@ class AlphaCharacter extends FlxSprite
 	public function new(x:Float, y:Float, textSize:Float)
 	{
 		super(x, y);
-		var tex = Paths.getSparrowAtlas('alphabet');
+		var tex = Paths.getSparrowAtlas('androidcontrols/menu/alphabet');
 		frames = tex;
 
 		setGraphicSize(Std.int(width * textSize));
