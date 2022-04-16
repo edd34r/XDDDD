@@ -1481,13 +1481,13 @@ class PlayState extends MusicBeatState
 					case 'drowning' | 'd.i.e':
 						dialogueShit(doof);
 					case 'the-murderer':
-						playCutscene('themurderer', 112, doof);
+						playCutscene('themurderer', doof);
 					case 'red-megalovania':
-						playCutscene('redmegalovania', 16, doof);
+						playCutscene('redmegalovania', doof);
 					case 'psychotic-breakdown':
-						playCutscene('psychoticbreakdown', 22, doof);
+						playCutscene('psychoticbreakdown', doof);
 					case 'anthropophobia':
-						playCutscene('anthropophobia', 18, doof);
+						playCutscene('anthropophobia', doof);
 					default:
 						startCountdown();
 				}
@@ -1512,11 +1512,10 @@ class PlayState extends MusicBeatState
 		super.create();
 	}
 
-	function playCutscene(videoPlaying:String,time:Float,dialogueBox:DialogueBox):Void
+	function playCutscene(videoPlaying:String,dialogueBox:DialogueBox):Void
 	{
-		var video:MP4Handler = new MP4Handler();
-   		video.playMP4(Paths.video(videoPlaying), null); 
-		new FlxTimer().start(time, function(tmr:FlxTimer)
+                var video = new FlxVideo(Paths.video(videoPlaying));
+	        video.finishCallback = function()
 		{
 			if (dialogueBox != null)
 			{
@@ -1524,18 +1523,17 @@ class PlayState extends MusicBeatState
 				add(dialogueBox);
 			}
 			else
-				startCountdown();
-		});
+				startCountdown();						
+		}
 	}
 
-	function playCutscene2(videoPlaying:String,time:Float):Void
+	function playCutscene2(videoPlaying:String):Void
 	{
-		var video:MP4Handler = new MP4Handler();
-		video.playMP4(Paths.video(videoPlaying), null); 
-		new FlxTimer().start(time, function(tmr:FlxTimer)
+                var video = new FlxVideo(Paths.video(videoPlaying));
+	        video.finishCallback = function()
 		{
-			LoadingState.loadAndSwitchState(new PlayState());
-		});
+			LoadingState.loadAndSwitchState(new PlayState());						
+		}
 	}
 
 	function dialogueShit(?dialogueBox:DialogueBox):Void
@@ -3176,7 +3174,7 @@ class PlayState extends MusicBeatState
 	
 							FlxG.sound.music.stop();
 							PlayState.SONG = Song.loadFromJson(poop, 'hallucinations');
-							playCutscene2('genocide', 27);
+							playCutscene2('genocide');
 						}
 						else
 						{
@@ -3189,7 +3187,7 @@ class PlayState extends MusicBeatState
 	
 							FlxG.sound.music.stop();
 							PlayState.SONG = Song.loadFromJson(poop, 'last-hope');
-							playCutscene2('pacifist', 9.2);
+							playCutscene2('pacifist');
 						}
 					case 'last-hope' | 'hallucinations':
 						FlxG.sound.music.stop();
@@ -3279,7 +3277,7 @@ class PlayState extends MusicBeatState
 						{
 							case 'the-murderer':
 								PlayState.SONG = Song.loadFromJson(poop, PlayState.storyPlaylist[0]);
-								playCutscene2('themurderer2', 28);
+								playCutscene2('themurderer2');
 							case 'last-hope':
 								FlxG.save.data.pacifistEnding = true;
 								LoadingState.loadAndSwitchState(new EndingState());
@@ -3288,7 +3286,7 @@ class PlayState extends MusicBeatState
 								LoadingState.loadAndSwitchState(new EndingState());
 							case 'drowning':
 								PlayState.SONG = Song.loadFromJson(poop, PlayState.storyPlaylist[0]);
-								playCutscene2('lmao_undyne_fucking_dies', 9);
+								playCutscene2('lmao_undyne_fucking_dies');
 							default:
 								PlayState.SONG = Song.loadFromJson(poop, PlayState.storyPlaylist[0]);
 								LoadingState.loadAndSwitchState(new PlayState());
