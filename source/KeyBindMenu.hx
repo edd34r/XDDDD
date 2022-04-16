@@ -3,7 +3,7 @@ package;
 /// Code created by Rozebud for FPS Plus (thanks rozebud)
 // modified by KadeDev for use in Kade Engine/Tricky
 
-import flixel.input.gamepad.FlxGamepad;
+
 import flixel.util.FlxAxes;
 import flixel.FlxSubState;
 import Options.Option;
@@ -113,8 +113,6 @@ class KeyBindMenu extends FlxSubState
 
 	override function update(elapsed:Float)
 	{
-        var gamepad:FlxGamepad = FlxG.gamepads.lastActive;
-
         if (frames <= 10)
             frames++;
 
@@ -140,41 +138,15 @@ class KeyBindMenu extends FlxSubState
                     textUpdate();
                 }
 
-                if (FlxG.keys.justPressed.ENTER){
+                if (controls.ACCEPT){
                     FlxG.sound.play(Paths.sound('scrollMenu'));
                     state = "input";
                 }
-                else if(FlxG.keys.justPressed.ESCAPE){
+                else if(controls.BACK){
                     quit();
                 }
                 else if (FlxG.keys.justPressed.BACKSPACE){
                     reset();
-                }
-                if (gamepad != null) // GP Logic
-                {
-                    if (gamepad.justPressed.DPAD_UP)
-                    {
-                        FlxG.sound.play(Paths.sound('scrollMenu'));
-                        changeItem(-1);
-                        textUpdate();
-                    }
-                    if (gamepad.justPressed.DPAD_DOWN)
-                    {
-                        FlxG.sound.play(Paths.sound('scrollMenu'));
-                        changeItem(1);
-                        textUpdate();
-                    }
-
-                    if (gamepad.justPressed.START && frames > 10){
-                        FlxG.sound.play(Paths.sound('scrollMenu'));
-                        state = "input";
-                    }
-                    else if(gamepad.justPressed.LEFT_TRIGGER){
-                        quit();
-                    }
-                    else if (gamepad.justPressed.RIGHT_TRIGGER){
-                        reset();
-                    }
                 }
 
             case "input":
@@ -188,7 +160,7 @@ class KeyBindMenu extends FlxSubState
             case "waiting":
                 if (gamepad != null && KeyBinds.gamepad) // GP Logic
                 {
-                    if(FlxG.keys.justPressed.ESCAPE){ // just in case you get stuck
+                    if(controls.BACK){ // just in case you get stuck
                         gpKeys[curSelected] = tempKey;
                         state = "select";
                         FlxG.sound.play(Paths.sound('confirmMenu'));
@@ -213,12 +185,12 @@ class KeyBindMenu extends FlxSubState
                 }
                 else
                 {
-                    if(FlxG.keys.justPressed.ESCAPE){
+                    if(controls.BACK){
                         keys[curSelected] = tempKey;
                         state = "select";
                         FlxG.sound.play(Paths.sound('confirmMenu'));
                     }
-                    else if(FlxG.keys.justPressed.ENTER){
+                    else if(controls.ACCEPT){
                         addKey(defaultKeys[curSelected]);
                         save();
                         state = "select";

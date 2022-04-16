@@ -1,6 +1,6 @@
 package;
 
-import flixel.input.gamepad.FlxGamepad;
+
 import Controls.KeyboardScheme;
 import flixel.FlxG;
 import flixel.FlxObject;
@@ -62,6 +62,10 @@ class CreditState extends MusicBeatState
 				});
 			}
 		});
+
+		#if android
+		addVirtualPad(NONE, B);
+		#end
 
 		super.create();
 	}

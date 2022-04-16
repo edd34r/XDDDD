@@ -160,7 +160,19 @@ class DialogueBox extends FlxSpriteGroup
 		portraitLeft.animation.play(currentLeftPortraitAnim);
 		portraitRight.animation.play(currentRightPortraitAnim);
 
-		if (PlayerSettings.player1.controls.ACCEPT && dialogueStarted == true)
+		#if android
+		var justTouched:Bool = false;
+
+		for (touch in FlxG.touches.list)
+		{
+			if (touch.justPressed)
+			{
+				justTouched = true;
+			}
+		}
+		#end
+
+		if (PlayerSettings.player1.controls.ACCEPT #if android || justTouched #end && dialogueStarted == true)
 		{
 			remove(dialogue);
 				

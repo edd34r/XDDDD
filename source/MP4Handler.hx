@@ -3,18 +3,27 @@ package;
 import flixel.FlxSprite;
 import flixel.FlxG;
 import flixel.FlxState;
+#if android
+import extension.videoview.VideoView;
+import android.AndroidTools;
+#elseif windows
+import vlc.VlcBitmap;
 import openfl.events.Event;
+#elseif html5
 import openfl.media.Video;
 import openfl.net.NetConnection;
 import openfl.net.NetStream;
-import vlc.VlcBitmap;
+#end
 
 // THIS IS FOR TESTING
 // DONT STEAL MY CODE >:(
 class MP4Handler
 {
+	#if html5
 	public static var video:Video;
 	public static var netStream:NetStream;
+	#end
+
 	public static var finishCallback:Void->Void;
 	public var sprite:FlxSprite;
 	#if desktop
@@ -33,6 +42,8 @@ class MP4Handler
 
 	public function playMP4(path:String, voidCallback:Void->Void, ?outputTo:FlxSprite = null, ?repeat:Bool = false, ?isWindow:Bool = false, ?isFullscreen:Bool = false):Void
 	{
+		finishCallback = voidCallback;
+
 		#if html5
 		FlxG.autoPause = false;
 
@@ -59,9 +70,17 @@ class MP4Handler
 		nc.addEventListener("netStatus", netConnection_onNetStatus);
 
 		netStream.play(path);
+
+		#elseif android
+
+		VideoView.playVideo('file:///android_asset/' + path));
+		VideoView.onCompletion = function(){
+			if (finishCallback != null){
+				finishCallback();
+			}
+		}
 		
 		#elseif windows
-		finishCallback = voidCallback;
 
 		vlcBitmap = new VlcBitmap();
 		vlcBitmap.set_height(FlxG.stage.stageHeight);

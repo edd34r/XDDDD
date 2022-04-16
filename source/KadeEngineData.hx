@@ -1,4 +1,4 @@
-import flixel.input.gamepad.FlxGamepad;
+
 import openfl.Lib;
 import flixel.FlxG;
 

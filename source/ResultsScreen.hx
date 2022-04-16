@@ -4,7 +4,6 @@ import openfl.geom.Matrix;
 import openfl.display.BitmapData;
 import flixel.system.FlxSound;
 import flixel.util.FlxAxes;
-import flixel.FlxSubState;
 import Options.Option;
 import flixel.input.FlxInput;
 import flixel.input.keyboard.FlxKey;
@@ -28,7 +27,7 @@ import flixel.input.FlxKeyManager;
 
 using StringTools;
 
-class ResultsScreen extends FlxSubState
+class ResultsScreen extends MusicBeatSubstate
 {
     public var background:FlxSprite;
     public var text:FlxText;
@@ -74,7 +73,7 @@ class ResultsScreen extends FlxSubState
             text.text = "Week Cleared!";
         }
 
-        comboText = new FlxText(20,-75,0,'Judgements:\nSicks - ${PlayState.sicks}\nGoods - ${PlayState.goods}\nBads - ${PlayState.bads}\n\nCombo Breaks: ${(PlayState.isStoryMode ? PlayState.campaignMisses : PlayState.misses)}\nHighest Combo: ${PlayState.highestCombo + 1}\n\nScore: ${PlayState.instance.songScore}\nAccuracy: ${HelperFunctions.truncateFloat(PlayState.instance.accuracy,2)}%\n\n${Ratings.GenerateLetterRank(PlayState.instance.accuracy)}\n\nF1 - View replay\nF2 - Replay song
+        comboText = new FlxText(20,-75,0,'Judgements:\nSicks - ${PlayState.sicks}\nGoods - ${PlayState.goods}\nBads - ${PlayState.bads}\n\nCombo Breaks: ${(PlayState.isStoryMode ? PlayState.campaignMisses : PlayState.misses)}\nHighest Combo: ${PlayState.highestCombo + 1}\n\nScore: ${PlayState.instance.songScore}\nAccuracy: ${HelperFunctions.truncateFloat(PlayState.instance.accuracy,2)}%\n\n${Ratings.GenerateLetterRank(PlayState.instance.accuracy)}\n\nF1 / B - View replay\nF2 / C - Replay song
         ');
         comboText.size = 28;
         comboText.setBorderStyle(FlxTextBorderStyle.OUTLINE,FlxColor.BLACK,4,1);
@@ -82,7 +81,7 @@ class ResultsScreen extends FlxSubState
         comboText.scrollFactor.set();
         add(comboText);
 
-        contText = new FlxText(FlxG.width - 475,FlxG.height + 50,0,'Press ENTER to continue.');
+        contText = new FlxText(FlxG.width - 475,FlxG.height + 50,0,'Press ENTER / A to continue.');
         contText.size = 28;
         contText.setBorderStyle(FlxTextBorderStyle.OUTLINE,FlxColor.BLACK,4,1);
         contText.color = FlxColor.WHITE;
@@ -159,6 +158,11 @@ class ResultsScreen extends FlxSubState
 
         cameras = [FlxG.cameras.list[FlxG.cameras.list.length - 1]];
 
+        #if android
+        addVirtualPad(NONE, A_B_C);
+        addPadCamera();
+        #end
+
 		super.create();
 	}
 
@@ -172,7 +176,7 @@ class ResultsScreen extends FlxSubState
 
         // keybinds
 
-        if (PlayerSettings.player1.controls.ACCEPT)
+        if (controls.ACCEPT)
         {
             music.fadeOut(0.3);
             
@@ -199,7 +203,7 @@ class ResultsScreen extends FlxSubState
                 FlxG.switchState(new FreeplayState());
         }
 
-        if (FlxG.keys.justPressed.F1)
+        if (FlxG.keys.justPressed.F1 #if android || _virtualpad.buttonB.justPressed #end)
         {
             trace(PlayState.rep.path);
             PlayState.rep = Replay.LoadReplay(PlayState.rep.path);
@@ -237,7 +241,7 @@ class ResultsScreen extends FlxSubState
             LoadingState.loadAndSwitchState(new PlayState());
         }
 
-        if (FlxG.keys.justPressed.F2 )
+        if (FlxG.keys.justPressed.F2 #if android || _virtualpad.buttonC.justPressed #end)
         {
             PlayState.rep = null;
 

@@ -137,6 +137,9 @@ class GameplayCustomizeState extends MusicBeatState
 
         FlxG.mouse.visible = true;
 
+        #if android
+        addVirtualPad(NONE, A_B);
+        #end
     }
 
     override function update(elapsed:Float) {
@@ -166,7 +169,7 @@ class GameplayCustomizeState extends MusicBeatState
             FlxG.save.data.changedHit = true;
         }
 
-        if (FlxG.keys.justPressed.R)
+        if (FlxG.keys.justPressed.R #if android || _virtualpad.buttonA.justPressed #end)
         {
             sick.x = defaultX;
             sick.y = defaultY;

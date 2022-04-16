@@ -1,6 +1,6 @@
 package;
 
-import flixel.input.gamepad.FlxGamepad;
+
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.addons.transition.FlxTransitionableState;
@@ -235,6 +235,10 @@ class StoryMenuState extends MusicBeatState
 		updateText();
 
 		trace("Line 165");
+
+        #if android
+        addVirtualPad(FULL, A_B);
+        #end
 
 		super.create();
 	}

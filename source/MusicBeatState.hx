@@ -56,7 +56,7 @@ class MusicBeatState extends FlxUIState
 
 	#if android
 	public function addAndroidControls() {
-                androidc = new AndroidControls();
+        androidc = new AndroidControls();
 
 		switch (androidc.mode)
 		{
@@ -75,9 +75,18 @@ class MusicBeatState extends FlxUIState
 		var camcontrol = new flixel.FlxCamera();
 		FlxG.cameras.add(camcontrol);
 		camcontrol.bgColor.alpha = 0;
+
 		androidc.cameras = [camcontrol];
 
 		androidc.visible = false;
+
+		if (SONG.song.toLowerCase() == 'anthropophobia')
+		{
+			_virtualpad = new FlxVirtualPad(NONE, D, 0.75, true);
+			_virtualpad.cameras = [camcontrol];
+			_virtualpad.visible = false;
+			add(_virtualpad);
+		}
 
 		add(androidc);
 	}

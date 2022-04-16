@@ -1,6 +1,6 @@
 package;
 
-import flixel.input.gamepad.FlxGamepad;
+
 import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
 import openfl.Lib;
@@ -30,32 +30,25 @@ class OptionsMenu extends MusicBeatState
 			new DownscrollOption("Change the layout of the strumline."),
 			new GhostTapOption("Ghost Tapping is when you tap a direction and it doesn't give you a miss."),
 			new Judgement("Customize your Hit Timings (LEFT or RIGHT)"),
-			#if desktop
 			new FPSCapOption("Cap your FPS"),
-			#end
 			new ScrollSpeedOption("Change your scroll speed (1 = Chart dependent)"),
 			new AccuracyDOption("Change how accuracy is calculated. (Accurate = Simple, Complex = Milisecond Based)"),
 			new ResetButtonOption("Toggle pressing R to gameover."),
-			// new OffsetMenu("Get a note offset based off of your inputs!"),
 			new CustomizeGameplay("Drag'n'Drop Gameplay Modules around to your preference")
 		]),
 		new OptionCategory("Appearance", [
 			new DistractionsAndEffectsOption("Toggle stage distractions that can hinder your gameplay."),
 			new CamZoomOption("Toggle the camera zoom in-game."),
-			#if desktop
 			new RainbowFPSOption("Make the FPS Counter Rainbow"),
 			new AccuracyOption("Display accuracy information."),
 			new NPSDisplayOption("Shows your current Notes Per Second."),
 			new SongPositionOption("Show the songs current position (as a bar)"),
 			new CpuStrums("CPU's strumline lights up when a note hits it."),
-			#end
 		]),
 		
 		new OptionCategory("Misc", [
-			#if desktop
 			new FPSOption("Toggle the FPS Counter"),
 			new ReplayOption("View replays"),
-			#end
 			new FlashingLightsOption("Toggle flashing lights that can cause epileptic seizures and strain."),
 			new WatermarkOption("Enable and disable all watermarks from the engine."),
 			new ScoreScreen("Show the score screen after the end of a song"),
@@ -113,6 +106,16 @@ class OptionsMenu extends MusicBeatState
 		FlxTween.tween(versionShit,{y: FlxG.height - 18},2,{ease: FlxEase.elasticInOut});
 		FlxTween.tween(blackBorder,{y: FlxG.height - 18},2, {ease: FlxEase.elasticInOut});
 
+		#if android
+		var tipText:FlxText = new FlxText(10, 12, 0, 'Press C to Go In Android Controls Menu', 16);
+		tipText.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		tipText.borderSize = 2;
+		tipText.scrollFactor.set();
+		add(tipText);
+
+		addVirtualPad(FULL, A_B_C_X_Y);
+		#end
+
 		super.create();
 	}
 
@@ -154,7 +157,7 @@ class OptionsMenu extends MusicBeatState
 			{
 				if (currentSelectedCat.getOptions()[curSelected].getAccept())
 				{
-					if (FlxG.keys.pressed.SHIFT)
+					if (FlxG.keys.pressed.SHIFT #if android || _virtualpad.buttonY.pressed #end)
 						{
 							if (controls.RIGHT)
 								currentSelectedCat.getOptions()[curSelected].right();
@@ -171,7 +174,7 @@ class OptionsMenu extends MusicBeatState
 				}
 				else
 				{
-					if (FlxG.keys.pressed.SHIFT)
+					if (FlxG.keys.pressed.SHIFT #if android || _virtualpad.buttonY.pressed #end)
 					{
 						if (controls.RIGHT_P)
 							FlxG.save.data.offset += 0.1;
@@ -192,7 +195,7 @@ class OptionsMenu extends MusicBeatState
 			}
 			else
 			{
-				if (FlxG.keys.pressed.SHIFT)
+				if (FlxG.keys.pressed.SHIFT #if android || _virtualpad.buttonY.pressed #end)
 				{
 					if (controls.RIGHT_P)
 						FlxG.save.data.offset += 0.1;
@@ -208,7 +211,7 @@ class OptionsMenu extends MusicBeatState
 			}
 		
 
-			if (controls.RESET)
+			if (controls.RESET #if android || _virtualpad.buttonX.justPressed #end)
 					FlxG.save.data.offset = 0;
 
 			if (controls.ACCEPT)
@@ -235,6 +238,11 @@ class OptionsMenu extends MusicBeatState
 						}
 					curSelected = 0;
 				}
+
+				#if android
+					if (_virtualpad.buttonX.justPressed)
+						FlxG.switchState(new android.AndroidControlsMenu());
+				#end
 				
 				changeSelection();
 			}

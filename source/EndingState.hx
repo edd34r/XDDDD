@@ -37,12 +37,16 @@ class EndingState extends MusicBeatState
         endingScreen.antialiasing = true;
         add(endingScreen);
 
+        #if android
+        addVirtualPad(NONE, A);
+        #end
+
         super.create();
     }
 
     override public function update(elapsed:Float)
     {
-        if (FlxG.keys.justPressed.ENTER)
+        if (controls.ACCEPT)
         {
             FlxG.switchState(new MainMenuState());
         }
