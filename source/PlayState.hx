@@ -1521,6 +1521,7 @@ class PlayState extends MusicBeatState
 		add(bg);
 		new FlxVideo(Paths.video(videoPlaying)).finishCallback = function()
 		{
+		        remove(bg);
 			if (dialogueBox != null)
 			{	
 				add(dialogueBox);
@@ -1539,6 +1540,7 @@ class PlayState extends MusicBeatState
 		add(bg);
 		new FlxVideo(Paths.video(videoPlaying)).finishCallback = function()
 		{
+		        remove(bg);
 			LoadingState.loadAndSwitchState(new PlayState());
 		};
 	}
