@@ -86,8 +86,8 @@ class SUtil
             FileSystem.createDirectory(SUtil.getPath() + "assets/replays");
         }
 
-	if (!FileSystem.exists(SUtil.getPath + 'assets/videos')) {
-	    FileSystem.createDirectory(SUtil.getPath + 'assets/videos');
+	if (!FileSystem.exists(SUtil.getPath() + 'assets/videos')) {
+	    FileSystem.createDirectory(SUtil.getPath() + 'assets/videos');
 	}
 
 	for (vid in cutscenesArr) {
