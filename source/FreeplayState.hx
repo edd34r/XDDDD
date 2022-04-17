@@ -46,6 +46,9 @@ class FreeplayState extends MusicBeatState
 
 	override function create()
 	{
+		Paths.clearStoredMemory();
+		Paths.clearUnusedMemory();
+
 		if (FlxG.save.data.pacifistEnding && FlxG.save.data.genocideEnding && !FlxG.save.data.unlockedWoundedShooting)
 			FlxG.save.data.unlockedWoundedShooting = true;
 
