@@ -78,8 +78,6 @@ class PlayState extends MusicBeatState
 {
 	public static var instance:PlayState = null;
 
-        public static var tempCM:Int = 0;
-
 	public static var curStage:String = '';
 	public static var SONG:SwagSong;
 	public static var isStoryMode:Bool = false;
@@ -1460,10 +1458,6 @@ class PlayState extends MusicBeatState
 			replayTxt.cameras = [camHUD];
 
         #if android
-                if (SONG.song.toLowerCase() == 'anthropophobia' && FlxG.save.data.dcontrol != 1) {
-                    tempCM = android.AndroidControls.Config.getcontrolmode();
-                    android.AndroidControls.Config.setcontrolmodeinstant(4);
-                }
 		addAndroidControls();
         #end
 
@@ -3131,11 +3125,7 @@ class PlayState extends MusicBeatState
 		if (SONG.song.toLowerCase() == 'anthropophobia' && FlxG.save.data.dcontrol == 1)
 		{
 			_virtualpad.visible = false;
-		}
-                if (SONG.song.toLowerCase() == 'anthropophobia' && FlxG.save.data.dcontrol != 1) {
-                    android.AndroidControls.Config.setcontrolmodeinstant(tempCM);
-                }
-		
+		}		
 		#end
 
 		if (isStoryMode)
