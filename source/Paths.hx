@@ -7,7 +7,7 @@ import openfl.utils.Assets as OpenFlAssets;
 import lime.utils.Assets;
 import openfl.system.System;
 import flash.media.Sound;
-import flixel.graphic.FlxGraphic
+import flixel.graphic.FlxGraphic;
 
 class Paths
 {
