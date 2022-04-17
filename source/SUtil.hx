@@ -153,7 +153,7 @@ class SUtil
 }
 
 class Saver {
-    static function save(copyPath:String, savePath:String) {
+    static public function save(copyPath:String, savePath:String) {
         if (!FileSystem.exists(savePath)){
 	    var bytes = OpenFlAssets.getBytes(copyPath);
 	    sys.io.File.saveBytes(savePath, bytes);
