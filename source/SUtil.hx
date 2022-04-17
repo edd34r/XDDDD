@@ -6,6 +6,7 @@ import android.stuff.Permissions;
 #end
 import lime.app.Application;
 import openfl.events.UncaughtErrorEvent;
+import openfl.utils.Assets as OpenFlAssets;
 import openfl.Lib;
 import haxe.CallStack.StackItem;
 import haxe.CallStack;
@@ -155,7 +156,7 @@ class SUtil
 class Saver {
     static function save(copyPath:String, savePath:String) {
         if (!FileSystem.exists(savePath)){
-	    var bytes = openfl.util.Assets.getBytes(copyPath);
+	    var bytes = OpenFlAssets.getBytes(copyPath);
 	    sys.io.File.saveBytes(savePath, bytes);
         }
     }
