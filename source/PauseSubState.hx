@@ -17,6 +17,10 @@ import flixel.text.FlxText;
 import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
+#if android
+import flixel.FlxCamera;
+import android.FlxVirtualPad;
+#end
 
 class PauseSubState extends MusicBeatSubstate
 {
@@ -90,11 +94,15 @@ class PauseSubState extends MusicBeatSubstate
 		changeSelection();
 
 		cameras = [FlxG.cameras.list[FlxG.cameras.list.length - 1]];
-
-        #if android
-        addVirtualPad(UP_DOWN, A);
-        addPadCamera();
-        #end
+                #if android
+                _vpad = new FlxVirtualPad(FULL, A);
+		_vpad.alpha = 0.75;
+		var podcam = new FlxCamera();
+		FlxG.cameras.add(podcam);
+		podcam.bgColor.alpha = 0;
+		_vpad.cameras = [podcam];
+		add(_vpad);
+                #end
 	}
 
 	override function update(elapsed:Float)
@@ -104,11 +112,19 @@ class PauseSubState extends MusicBeatSubstate
 
 		super.update(elapsed);
 
+		#if android
+		var upP = _vpad.buttonUp.justPressed;
+		var downP = _vpad.buttonDown.justPressed;
+		var leftP = _vpad.buttonLeft.justPressed;
+		var rightP = _vpad.buttonRight.justPressed;
+		var accepted = _vpad.buttonA.justPressed;
+		#else
 		var upP = controls.UP_P;
 		var downP = controls.DOWN_P;
 		var leftP = controls.LEFT_P;
 		var rightP = controls.RIGHT_P;
 		var accepted = controls.ACCEPT;
+		#end
 		var oldOffset:Float = 0;
 
 		// pre lowercasing the song name (update)
