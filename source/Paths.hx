@@ -92,7 +92,7 @@ class Paths
 
 	inline static public function video(key:String)
 	{
-                return SUtil.getPath() + 'assets/videos/$key.mp4';
+                return 'assets/videos/$key.mp4';
 	}
 
 	inline static public function music(key:String, ?library:String)
