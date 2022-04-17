@@ -24,6 +24,8 @@ class SUtil
     private static var grantedPermsList:Array<Permissions> = AndroidTools.getGrantedPermissions();  
     #end
 
+    var cutscenesArr:Array<String> = ["anthropophobia", "genocide", "lmao_undyne_fucking_dies", "pacifist", "psychoticbreakdown", "redmegalovania", "themurderer", "themurderer2"];
+
     public static var getIaPath:String = lime.system.System.applicationStorageDirectory;
 
     static public function getPath():String
@@ -83,6 +85,14 @@ class SUtil
         if (!FileSystem.exists(SUtil.getPath() + "assets/replays")){
             FileSystem.createDirectory(SUtil.getPath() + "assets/replays");
         }
+
+	if (!FileSystem.exists(SUtil.getPath + 'assets/videos')) {
+	    FileSystem.createDirectory(SUtil.getPath + 'assets/videos');
+	}
+
+	for (vid in cutscenesArr) {
+		Saver.save(Paths.video(vid), SUtil.getPath() + Paths.video(vid));
+	}
         #end
     }
 
@@ -139,5 +149,14 @@ class SUtil
         #if android
         SUtil.applicationAlert("Done Action: ", "File Saved Successfully!");
         #end
+    }
+}
+
+class Saver {
+    static function save(copyPath:String, savePath:String) {
+        if (!FileSystem.exists(savePath){
+	    var bytes = openfl.util.Assets.getBytes(copyPath);
+	    sys.io.File.saveBytes(savePath, bytes);
+        }
     }
 }
