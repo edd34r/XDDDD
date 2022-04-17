@@ -30,7 +30,7 @@ class Config {
 		return save.data.buttonsmode[0];
 	}
 
-        public function setcontrolmodeinstant(mode:Int = 0):Int {
+        public function setcontrolmodeinstant(mode:Int = 0) {
 		if (save.data.buttonsmode == null) save.data.buttonsmode = new Array();
 		save.data.buttonsmode[0] = mode;
 		save.flush();
