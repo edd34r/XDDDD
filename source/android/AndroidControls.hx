@@ -16,13 +16,13 @@ class Config {
 		save.bind("saveconrtol");
 	}
 
-	public static function getcontrolmode():Int {
+	public function getcontrolmode():Int {
 		if (save.data.buttonsmode != null) 
 			return save.data.buttonsmode[0];
 		return 0;
 	}
 
-	public static function setcontrolmode(mode:Int = 0):Int {
+	public function setcontrolmode(mode:Int = 0):Int {
 		if (save.data.buttonsmode == null) save.data.buttonsmode = new Array();
 		save.data.buttonsmode[0] = mode;
 		save.flush();
