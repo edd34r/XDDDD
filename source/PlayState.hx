@@ -1514,14 +1514,15 @@ class PlayState extends MusicBeatState
 
 	function playCutscene(videoPlaying:String,dialogueBox:DialogueBox):Void
 	{
-		var black:FlxSprite = new FlxSprite(-200, -200).makeGraphic(FlxG.width * 2, FlxG.height * 2, FlxColor.BLACK);
-		black.scrollFactor.set();
-		add(black);
+		inCutscene = true;
+		var bg = new FlxSprite(-FlxG.width, -FlxG.height).makeGraphic(FlxG.width * 3, FlxG.height * 3, FlxColor.BLACK);
+		bg.scrollFactor.set();
+		bg.cameras = [camHUD];
+		add(bg);
 		new FlxVideo(Paths.video(videoPlaying)).finishCallback = function()
 		{
 			if (dialogueBox != null)
-			{
-				inCutscene = true;	
+			{	
 				add(dialogueBox);
 			}
 			else
@@ -1531,9 +1532,11 @@ class PlayState extends MusicBeatState
 
 	function playCutscene2(videoPlaying:String):Void
 	{
-		var black:FlxSprite = new FlxSprite(-200, -200).makeGraphic(FlxG.width * 2, FlxG.height * 2, FlxColor.BLACK);
-		black.scrollFactor.set();
-		add(black);
+		inCutscene = true;
+		var bg = new FlxSprite(-FlxG.width, -FlxG.height).makeGraphic(FlxG.width * 3, FlxG.height * 3, FlxColor.BLACK);
+		bg.scrollFactor.set();
+		bg.cameras = [camHUD];
+		add(bg);
 		new FlxVideo(Paths.video(videoPlaying)).finishCallback = function()
 		{
 			LoadingState.loadAndSwitchState(new PlayState());
