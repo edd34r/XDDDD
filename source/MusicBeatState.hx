@@ -55,8 +55,10 @@ class MusicBeatState extends FlxUIState
 
 	#if android
 	public function addAndroidControls() {
-        androidc = new AndroidControls();
+		androidc = new AndroidControls();
 
+		if (PlayState.SONG.song.toLowerCase() == 'anthropophobia' && FlxG.save.data.dcontrol == 1)
+		{
 		switch (androidc.mode)
 		{
 			case VIRTUALPAD_RIGHT | VIRTUALPAD_LEFT | VIRTUALPAD_CUSTOM:
@@ -66,6 +68,11 @@ class MusicBeatState extends FlxUIState
 			case HITBOX:
 				controls.setHitBox(androidc.hbox);
 			default:
+		}
+		}
+                else
+		{
+			controls.setHitBox(androidc.hbox);
 		}
 
 		trackedinputs = controls.trackedinputs;
