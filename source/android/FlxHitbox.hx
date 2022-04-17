@@ -38,7 +38,7 @@ class FlxHitbox extends FlxSpriteGroup
 
 		hitbox = new FlxSpriteGroup();
 
-        var hitbox_hint:FlxSprite = new FlxSprite(0, 0);
+		var hitbox_hint:FlxSprite = new FlxSprite(0, 0);
 
 		switch (orgType){
 			case NORMAL:
