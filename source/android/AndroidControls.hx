@@ -30,11 +30,6 @@ class Config {
 		return save.data.buttonsmode[0];
 	}
 
-        public function setcontrolmodeinstant(mode:Int = 0) {
-		if (save.data.buttonsmode == null) save.data.buttonsmode = new Array();
-		save.data.buttonsmode[0] = mode;
-	}
-
 	public function savecustom(_pad:FlxVirtualPad) {
 		if (save.data.buttons == null)
 		{
@@ -107,6 +102,10 @@ class AndroidControls extends FlxSpriteGroup
 
 	function initControler(vpadMode:Int) 
 	{
+		if (PlayState.SONG.song.toLowerCase() == 'anthropophobia')
+		{
+			switch(FlxG.save.data.dcontrol) {
+				case 1:
 		switch (vpadMode)
 		{
 			case 0:
@@ -123,28 +122,44 @@ class AndroidControls extends FlxSpriteGroup
 				vpad = new FlxVirtualPad(DUO, NONE, 0.75, true);
 				add(vpad);		
 			case 4:
-				if (PlayState.SONG.song.toLowerCase() == 'anthropophobia')
-				{
-					switch(FlxG.save.data.dcontrol) {
-						case 1:
-							hbox = new FlxHitbox(NORMAL, 0.75, true);
-							add(hbox);
-						case 2:
-							hbox = new FlxHitbox(FIVE, 0.75, true);
-							add(hbox);
-						case 3:
-							hbox = new FlxHitbox(FIVE_UP, 0.75, true);
-							add(hbox);
-					}
-				}
-				else
-				{
-					hbox = new FlxHitbox(NORMAL, 0.75, true);
-					add(hbox);
-				}
+				hbox = new FlxHitbox(NORMAL, 0.75, true);
+				add(hbox);
 			default:
 				vpad = new FlxVirtualPad(RIGHT_FULL, NONE, 0.75, true);	
 				add(vpad);					
+		}
+				case 2:
+					hbox = new FlxHitbox(FIVE, 0.75, true);
+					add(hbox);
+				case 3:
+					hbox = new FlxHitbox(FIVE_UP, 0.75, true);
+					add(hbox);
+			}
+		}
+		else
+		{
+		switch (vpadMode)
+		{
+			case 0:
+				vpad = new FlxVirtualPad(RIGHT_FULL, NONE, 0.75, true);	
+				add(vpad);						
+			case 1:
+				vpad = new FlxVirtualPad(FULL, NONE, 0.75, true);
+				add(vpad);			
+			case 2:
+				vpad = new FlxVirtualPad(FULL, NONE, 0.75, true);
+				vpad = config.loadcustom(vpad);
+				add(vpad);	
+			case 3:
+				vpad = new FlxVirtualPad(DUO, NONE, 0.75, true);
+				add(vpad);		
+			case 4:
+				hbox = new FlxHitbox(NORMAL, 0.75, true);
+				add(hbox);
+			default:
+				vpad = new FlxVirtualPad(RIGHT_FULL, NONE, 0.75, true);	
+				add(vpad);					
+		}
 		}
 	}
 
