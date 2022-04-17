@@ -25,7 +25,7 @@ class Paths
         public static var dumpExclusions:Array<String> =
 	[
 		'assets/music/freakyMenu.$SOUND_EXT',
-		'assets/shared/music/breakfast.$SOUND_EXT'
+		'assets/shared/music/breakfast.$SOUND_EXT',
 	];
 
         /// haya I love you for the base cache dump I took to the max
@@ -148,11 +148,12 @@ class Paths
 		return getPath('data/$key.json', TEXT, library);
 	}
 
-	static public function sound(key:String, ?library:String)
+	static public function sound(key:String, ?library:String):Sound
 	{
-		return getPath('sounds/$key.$SOUND_EXT', SOUND, library);
+		var sound:Sound = returnSound('sounds', key, library);
+		return sound;
 	}
-
+	
 	inline static public function soundRandom(key:String, min:Int, max:Int, ?library:String)
 	{
 		return sound(key + FlxG.random.int(min, max), library);
@@ -163,34 +164,30 @@ class Paths
                 return 'assets/videos/$key.mp4';
 	}
 
-	inline static public function music(key:String, ?library:String)
+	inline static public function music(key:String, ?library:String):Sound
 	{
-		return getPath('music/$key.$SOUND_EXT', MUSIC, library);
+		var file:Sound = returnSound('music', key, library);
+		return file;
 	}
 
-	inline static public function voices(song:String)
+	inline static public function voices(song:String):Any
 	{
-		var songLowercase = StringTools.replace(song, " ", "-").toLowerCase();
-			switch (songLowercase) {
-				case 'dad-battle': songLowercase = 'dadbattle';
-				case 'philly-nice': songLowercase = 'philly';
-			}
-		return 'songs:assets/songs/${songLowercase}/Voices.$SOUND_EXT';
+		var songKey:String = '${song.toLowerCase().replace(' ', '-')}/Voices';
+		var voices = returnSound('songs', songKey);
+		return voices;
 	}
 
-	inline static public function inst(song:String)
+	inline static public function inst(song:String):Any
 	{
-		var songLowercase = StringTools.replace(song, " ", "-").toLowerCase();
-			switch (songLowercase) {
-				case 'dad-battle': songLowercase = 'dadbattle';
-				case 'philly-nice': songLowercase = 'philly';
-			}
-		return 'songs:assets/songs/${songLowercase}/Inst.$SOUND_EXT';
+		var songKey:String = '${song.toLowerCase().replace(' ', '-')}/Inst';
+		var inst = returnSound('songs', songKey);
+		return inst;
 	}
 
-	inline static public function image(key:String, ?library:String)
+	inline static public function image(key:String, ?library:String):FlxGraphic
 	{
-		return getPath('images/$key.png', IMAGE, library);
+		var returnAsset:FlxGraphic = returnGraphic(key, library);
+		return returnAsset;
 	}
 
 	inline static public function font(key:String)
@@ -206,5 +203,28 @@ class Paths
 	inline static public function getPackerAtlas(key:String, ?library:String)
 	{
 		return FlxAtlasFrames.fromSpriteSheetPacker(image(key, library), file('images/$key.txt', library));
+	}
+
+	public static function returnGraphic(key:String, ?library:String) {
+		var path = getPath('images/$key.png', IMAGE, library);
+		if (OpenFlAssets.exists(path, IMAGE)) {
+			if(!currentTrackedAssets.exists(path)) {
+				var newGraphic:FlxGraphic = FlxG.bitmap.add(path, false, path);
+				currentTrackedAssets.set(path, newGraphic);
+			}
+			localTrackedAssets.push(path);
+			return currentTrackedAssets.get(path);
+		}
+		return null;
+	}
+
+	public static function returnSound(path:String, key:String, ?library:String) {
+		var gottenPath:String = getPath('$path/$key.$SOUND_EXT', SOUND, library);	
+		gottenPath = gottenPath.substring(gottenPath.indexOf(':') + 1, gottenPath.length);
+		// trace(gottenPath);
+		if(!currentTrackedSounds.exists(gottenPath)) 
+			currentTrackedSounds.set(gottenPath, OpenFlAssets.getSound(getPath('$path/$key.$SOUND_EXT', SOUND, library)));
+		localTrackedAssets.push(gottenPath);
+		return currentTrackedSounds.get(gottenPath);
 	}
 }
