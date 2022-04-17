@@ -1,6 +1,7 @@
 package;
 
 import lime.utils.Assets;
+import openfl.utils.Assets as OpenFLassets;
 
 using StringTools;
 
@@ -57,7 +58,7 @@ class CoolUtil
 	}
 
 	private static function precacheSoundFile(file:Dynamic):Void {
-		if (Assets.exists(file, SOUND) || Assets.exists(file, MUSIC))
-			Assets.getSound(file, true);
+		if (OpenFLassets.exists(file, SOUND) || OpenFLassets.exists(file, MUSIC))
+			OpenFLassets.getSound(file, true);
 	}
 }
