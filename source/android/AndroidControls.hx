@@ -118,8 +118,25 @@ class AndroidControls extends FlxSpriteGroup
 				vpad = new FlxVirtualPad(DUO, NONE, 0.75, true);
 				add(vpad);		
 			case 4:
-				hbox = new FlxHitbox(0.75, true);
-				add(hbox);		
+				if (PlayState.SONG.song.toLowerCase() == 'anthropophobia')
+				{
+					switch(FlxG.save.data.dcontrol) {
+						case 1:
+							hbox = new FlxHitbox(NORMAL, 0.75, true);
+							add(hbox);
+						case 2:
+							hbox = new FlxHitbox(FIVE, 0.75, true);
+							add(hbox);
+						case 3:
+							hbox = new FlxHitbox(FIVE_UP, 0.75, true);
+							add(hbox);
+					}
+				}
+				else
+				{
+					hbox = new FlxHitbox(NORMAL, 0.75, true);
+					add(hbox);
+				}
 			default:
 				vpad = new FlxVirtualPad(RIGHT_FULL, NONE, 0.75, true);	
 				add(vpad);					

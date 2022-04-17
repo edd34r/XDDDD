@@ -16,14 +16,17 @@ class FlxHitbox extends FlxSpriteGroup
 	public var buttonDown:FlxButton;
 	public var buttonUp:FlxButton;
 	public var buttonRight:FlxButton;
+	public var buttonSpace:FlxButton;
 
+	public var orgType:HitboxType = NORMAL;
 	public var orgAlpha:Float = 0.75;
 	public var orgAntialiasing:Bool = true;
 	
-	public function new(?alphaAlt:Float = 0.75, ?antialiasingAlt:Bool = true)
+	public function new(type:HitboxType = NORMAL, ?alphaAlt:Float = 0.75, ?antialiasingAlt:Bool = true)
 	{
 		super();
 
+		orgType = type;
 		orgAlpha = alphaAlt;
 		orgAntialiasing = antialiasingAlt;
 
@@ -31,21 +34,45 @@ class FlxHitbox extends FlxSpriteGroup
 		buttonDown = new FlxButton(0, 0);
 		buttonUp = new FlxButton(0, 0);
 		buttonRight = new FlxButton(0, 0);
+		buttonSpace = new FlxButton(0, 0);
 
 		hitbox = new FlxSpriteGroup();
-		hitbox.add(add(buttonLeft = createhitbox(0, 0, "left")));
-		hitbox.add(add(buttonDown = createhitbox(320, 0, "down")));
-		hitbox.add(add(buttonUp = createhitbox(640, 0, "up")));
-		hitbox.add(add(buttonRight = createhitbox(960, 0, "right")));
 
-		var hitbox_hint:FlxSprite = new FlxSprite(0, 0).loadGraphic(Paths.image('androidcontrols/hitbox_hint'));
+        var hitbox_hint:FlxSprite = new FlxSprite(0, 0);
+
+		switch (orgType){
+			case NORMAL:
+				hitbox_hint.loadGraphic(Paths.image('androidcontrols/hitbox/normal_hint'));
+
+				hitbox.add(add(buttonLeft = createhitbox(0, 0, "left")));
+				hitbox.add(add(buttonDown = createhitbox(320, 0, "down")));
+				hitbox.add(add(buttonUp = createhitbox(640, 0, "up")));
+				hitbox.add(add(buttonRight = createhitbox(960, 0, "right")));
+			case FIVE:
+				hitbox_hint.loadGraphic(Paths.image('androidcontrols/hitbox/five_hint'));
+
+				hitbox.add(add(buttonLeft = createhitbox(0, 0, "left"))); 
+				hitbox.add(add(buttonDown = createhitbox(320, 0, "down")));
+				hitbox.add(add(buttonUp = createhitbox(640, 0, "up")));    
+				hitbox.add(add(buttonRight = createhitbox(960, 0, "right")));
+				hitbox.add(add(buttonSpace = createhitbox(0, 480, "space"))); 
+			case FIVE_UP:
+				hitbox_hint.loadGraphic(Paths.image('androidcontrols/hitbox/five-up_hint'));
+
+				hitbox.add(add(buttonLeft = createhitbox(0, 240, "left")));
+				hitbox.add(add(buttonDown = createhitbox(320, 240, "down")));
+				hitbox.add(add(buttonUp = createhitbox(640, 240, "up")));
+				hitbox.add(add(buttonRight = createhitbox(960, 240, "right")));
+				hitbox.add(add(buttonSpace = createhitbox(0, 0, "space")));
+		}
+
 		hitbox_hint.antialiasing = orgAntialiasing;
 		hitbox_hint.alpha = orgAlpha;
 		add(hitbox_hint);
 	}
 
 	public function createhitbox(x:Float = 0, y:Float = 0, frames:String) 
-        {
+	{
 		var button = new FlxButton(x, y);
 		button.loadGraphic(FlxGraphic.fromFrame(getFrames().getByName(frames)));
 		button.antialiasing = orgAntialiasing;
@@ -56,9 +83,16 @@ class FlxHitbox extends FlxSpriteGroup
 		return button;
 	}
 
-	public static function getFrames():FlxAtlasFrames
+	public function getFrames():FlxAtlasFrames
 	{
-		return Paths.getSparrowAtlas('androidcontrols/hitbox');
+		return switch (orgType){
+			case NORMAL:
+				return Paths.getSparrowAtlas('androidcontrols/hitbox/normal');
+			case FIVE:
+				return Paths.getSparrowAtlas('androidcontrols/hitbox/five');
+			case FIVE_UP:
+				return Paths.getSparrowAtlas('androidcontrols/hitbox/five-up');
+		}
 	}
 
 	override public function destroy():Void
@@ -69,5 +103,12 @@ class FlxHitbox extends FlxSpriteGroup
 		buttonDown = null;
 		buttonUp = null;
 		buttonRight = null;
+		buttonSpace = null;
 	}
+}
+
+enum HitboxType {
+	NORMAL;
+	FIVE;
+	FIVE_UP;
 }

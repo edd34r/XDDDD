@@ -1470,6 +1470,18 @@ class PlayState extends MusicBeatState
 		add(blasters);
 		add(DustCloud1);
 
+		preload("icons/bf_chara", "shared");
+	    preload("icons/bf_icons", "shared");
+		preload("icons/iconsKR", "shared");
+		preload("icons/chara_icons", "shared");
+		preload("icons/paps_icons", "shared");
+		preload("icons/pico_icons", "shared");
+		preload("NotesKR/NOTE_assets_Dust", "shared");
+		preload("attack", "shared");
+		preload("-20", "shared");
+		preload("NotesKR/NOTE_assets_KR", "shared");
+	    preload("NotesKR/NOTE_assets_phantom", "shared");
+
 		startingSong = true;
 
 		if (isStoryMode)
@@ -1571,7 +1583,7 @@ class PlayState extends MusicBeatState
 
 		#if android
 		androidc.visible = true;
-		if (SONG.song.toLowerCase() == 'anthropophobia')
+		if (SONG.song.toLowerCase() == 'anthropophobia' && FlxG.save.data.dcontrol == 1)
 		{
 			_virtualpad.visible = true;
 		}
@@ -2313,12 +2325,18 @@ class PlayState extends MusicBeatState
 				// phillyCityLights.members[curLight].alpha -= (Conductor.crochet / 1000) * FlxG.elapsed;
 		}
 
-
-
 		//bf slash mechanic in d.i.e
 		if (SONG.song.toLowerCase() == 'anthropophobia')
 		{
-			if (FlxG.keys.justPressed.SPACE #if android || _virtualpad.buttonD.justPressed #end)
+			var buttonS:Bool = false;
+			
+			if (FlxG.save.data.dcontrol != 1) {
+				buttonS = androidc.hbox.buttonSpace.justPressed;
+			} else {
+				buttonS = _virtualpad.buttonD.justPressed;
+			}
+
+			if (FlxG.keys.justPressed.SPACE #if android || buttonS #end)
 			{
 				attack.visible = false;
 
@@ -3104,7 +3122,7 @@ class PlayState extends MusicBeatState
 	{
 		#if android
 		androidc.visible = false;
-		if (SONG.song.toLowerCase() == 'anthropophobia')
+		if (SONG.song.toLowerCase() == 'anthropophobia' && FlxG.save.data.dcontrol == 1)
 		{
 			_virtualpad.visible = false;
 		}
@@ -5425,6 +5443,14 @@ class PlayState extends MusicBeatState
 		{
 			charaslash();
 		}
+	}
+
+	public function preload(graphic:String, lib:String) //preload assets
+	{
+		var newthing:FlxSprite = new FlxSprite(0,0).loadGraphic(Paths.image(graphic, lib));
+		newthing.visible = false;
+		add(newthing);
+		remove(newthing);
 	}
 
 	var curLight:Int = 0;

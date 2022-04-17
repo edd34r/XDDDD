@@ -72,7 +72,33 @@ class Option
 	public function right():Bool { return throw "stub!"; }
 }
 
+class FifthhitboxPos extends Option
+{
+	var adresses = ["PlaceHolder", "Dodge Button", "5th hitbox at the top", "5th hitbox at the bottom"];
+	public function new(desc:String)
+	{
+		super();
+		description = desc;
+	}
 
+	public override function press():Bool
+	{
+		if (FlxG.save.data.dcontrol == 1) {
+		    FlxG.save.data.dcontrol = 2;
+		} else if (FlxG.save.data.dcontrol == 2) {
+			FlxG.save.data.dcontrol = 3;
+		} else if (FlxG.save.data.dcontrol == 3) {
+			FlxG.save.data.dcontrol = 1;
+		}
+		display = updateDisplay();
+		return true;
+	}
+
+	private override function updateDisplay():String
+	{
+		return adresses[FlxG.save.data.dcontrol];
+	}
+}
 
 class DFJKOption extends Option
 {
