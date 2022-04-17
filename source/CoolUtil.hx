@@ -47,18 +47,4 @@ class CoolUtil
 		}
 		return dumbArray;
 	}
-
-	//uhhhh does this even work at all? i'm starting to doubt
-	public static function precacheSound(sound:String, ?library:String = null):Void {
-		precacheSoundFile(Paths.sound(sound, library));
-	}
-
-	public static function precacheMusic(sound:String, ?library:String = null):Void {
-		precacheSoundFile(Paths.music(sound, library));
-	}
-
-	private static function precacheSoundFile(file:Dynamic):Void {
-		if (OpenFLassets.exists(file, SOUND) || OpenFLassets.exists(file, MUSIC))
-			OpenFLassets.getSound(file, true);
-	}
 }
