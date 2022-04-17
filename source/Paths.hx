@@ -9,6 +9,8 @@ import openfl.system.System;
 
 class Paths
 {
+        public static var currentTrackedSounds:Map<String, Sound> = [];
+        
 	inline public static var SOUND_EXT = #if web "mp3" #else "ogg" #end;
 
 	static var currentLevel:String;
