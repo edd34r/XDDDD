@@ -1520,11 +1520,6 @@ class PlayState extends MusicBeatState
 		if (!loadRep)
 			rep = new Replay("na");
 
-		CoolUtil.precacheSound('missnote1');
-		CoolUtil.precacheSound('missnote2');
-		CoolUtil.precacheSound('missnote3');
-		CoolUtil.precacheMusic('breakfast');
-
 		super.create();
 
 		Paths.clearUnusedMemory();
