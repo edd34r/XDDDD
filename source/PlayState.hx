@@ -314,6 +314,8 @@ class PlayState extends MusicBeatState
 
 	override public function create()
 	{
+		Paths.clearStoredMemory();
+
 		instance = this;
 		attackedSans = false;
 		
@@ -322,9 +324,6 @@ class PlayState extends MusicBeatState
 		
 		if (FlxG.sound.music != null)
 			FlxG.sound.music.stop();
-
-		FlxG.sound.cache(Paths.inst(PlayState.SONG.song));
-		FlxG.sound.cache(Paths.voices(PlayState.SONG.song));
 
 		if (!isStoryMode)
 		{
@@ -1522,6 +1521,8 @@ class PlayState extends MusicBeatState
 			rep = new Replay("na");
 
 		super.create();
+
+		Paths.clearUnusedMemory();
 	}
 
 	function playCutscene(videoPlaying:String,dialogueBox:DialogueBox):Void
