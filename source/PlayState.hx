@@ -1461,8 +1461,8 @@ class PlayState extends MusicBeatState
 
         #if android
                 if (SONG.song.toLowerCase() == 'anthropophobia' && FlxG.save.data.dcontrol != 1) {
-                    tempCM = android.Config.getcontrolmode();
-                    android.Config.setcontrolmodeinstant(4);
+                    tempCM = android.AndroidControls.Config.getcontrolmode();
+                    android.AndroidControls.Config.setcontrolmodeinstant(4);
                 }
 		addAndroidControls();
         #end
@@ -3133,7 +3133,7 @@ class PlayState extends MusicBeatState
 			_virtualpad.visible = false;
 		}
                 if (SONG.song.toLowerCase() == 'anthropophobia' && FlxG.save.data.dcontrol != 1) {
-                    android.Config.setcontrolmodeinstant(tempCM);
+                    android.AndroidControls.Config.setcontrolmodeinstant(tempCM);
                 }
 		
 		#end
