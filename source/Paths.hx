@@ -6,11 +6,13 @@ import openfl.utils.AssetType;
 import openfl.utils.Assets as OpenFlAssets;
 import lime.utils.Assets;
 import openfl.system.System;
+import flash.media.Sound;
+import flixel.graphic.FlxGraphic
 
 class Paths
 {
         public static var currentTrackedSounds:Map<String, Sound> = [];
-        
+        public static var currentTrackedAssets:Map<String, FlxGraphic> = [];
 	inline public static var SOUND_EXT = #if web "mp3" #else "ogg" #end;
 
 	static var currentLevel:String;
