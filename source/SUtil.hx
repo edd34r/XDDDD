@@ -23,9 +23,8 @@ class SUtil
     private static var aDir:String = null;
     private static var sPath:String = AndroidTools.getExternalStorageDirectory();  
     private static var grantedPermsList:Array<Permissions> = AndroidTools.getGrantedPermissions();  
+    private static var cutscenesArr:Array<String> = ["anthropophobia", "genocide", "lmao_undyne_fucking_dies", "pacifist", "psychoticbreakdown", "redmegalovania", "themurderer", "themurderer2"];
     #end
-
-    var cutscenesArr:Array<String> = ["anthropophobia", "genocide", "lmao_undyne_fucking_dies", "pacifist", "psychoticbreakdown", "redmegalovania", "themurderer", "themurderer2"];
 
     public static var getIaPath:String = lime.system.System.applicationStorageDirectory;
 
