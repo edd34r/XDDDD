@@ -9,6 +9,8 @@ import openfl.system.System;
 import flash.media.Sound;
 import flixel.graphics.FlxGraphic;
 
+using StringTools;
+
 class Paths
 {
         public static var currentTrackedSounds:Map<String, Sound> = [];
