@@ -33,7 +33,6 @@ class Config {
         public function setcontrolmodeinstant(mode:Int = 0) {
 		if (save.data.buttonsmode == null) save.data.buttonsmode = new Array();
 		save.data.buttonsmode[0] = mode;
-		save.flush();
 	}
 
 	public function savecustom(_pad:FlxVirtualPad) {
