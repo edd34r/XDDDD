@@ -1,3 +1,4 @@
+
 package;
 
 import lime.app.Application;
@@ -584,7 +585,7 @@ class ReplayOption extends Option
 	{
 		trace("switch");
 		FlxG.switchState(new LoadReplayState());
-		Main.cleanCache();
+		
 		return false;
 	}
 
@@ -627,7 +628,7 @@ class CustomizeGameplay extends Option
 	{
 		trace("switch");
 		FlxG.switchState(new GameplayCustomizeState());
-		Main.cleanCache();
+		
 		return false;
 	}
 

@@ -129,7 +129,7 @@ class AndroidControlsMenu extends MusicBeatState
 		{
 			save();
 			FlxG.switchState(new OptionsMenu());
-			Main.cleanCache();
+			
 		}
 		#end
 	}

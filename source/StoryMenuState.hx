@@ -63,6 +63,9 @@ class StoryMenuState extends MusicBeatState
 
 	override function create()
 	{
+		Main.clearMemory(false);
+		Main.clearMemory(true);
+
 		#if windows
 		// Updating Discord Rich Presence
 		DiscordClient.changePresence("In the Story Mode Menu", null);
@@ -307,7 +310,7 @@ class StoryMenuState extends MusicBeatState
 			FlxG.sound.play(Paths.sound('cancelMenu'));
 			movedBack = true;
 			FlxG.switchState(new MainMenuState());
-			Main.cleanCache();
+			
 		}
 
 		super.update(elapsed);

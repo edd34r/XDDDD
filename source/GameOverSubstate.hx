@@ -71,12 +71,12 @@ class GameOverSubstate extends MusicBeatSubstate
 			if (PlayState.isStoryMode)
 			{
 				FlxG.switchState(new StoryMenuState());
-				Main.cleanCache();
+				
 			}
 			else
 			{
 				FlxG.switchState(new FreeplayState());
-				Main.cleanCache();
+				
 			}
 			PlayState.loadRep = false;
 		}

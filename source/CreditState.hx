@@ -80,7 +80,7 @@ class CreditState extends MusicBeatState
 			  FlxG.sound.play(Paths.sound('cancelMenu'));
 			  movedBack = true;
 			  FlxG.switchState(new MainMenuState());
-			  Main.cleanCache();
+			  
 		  }
 		super.update(elapsed);
 	}

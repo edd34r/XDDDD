@@ -314,6 +314,8 @@ class PlayState extends MusicBeatState
 
 	override public function create()
 	{
+		Main.clearMemory(true);
+
 		instance = this;
 		attackedSans = false;
 		
@@ -1519,6 +1521,8 @@ class PlayState extends MusicBeatState
 			rep = new Replay("na");
 
 		super.create();
+
+		Main.clearMemory(false);
 	}
 
 	function playCutscene(videoPlaying:String,dialogueBox:DialogueBox):Void
@@ -2478,7 +2482,7 @@ class PlayState extends MusicBeatState
 			{
 				trace('GITAROO MAN EASTER EGG');
 				FlxG.switchState(new GitarooPause());
-				Main.cleanCache();
+				
 			}
 			else
 				openSubState(new PauseSubState(boyfriend.getScreenPosition().x, boyfriend.getScreenPosition().y));
@@ -3245,7 +3249,7 @@ class PlayState extends MusicBeatState
 						{
 							FlxG.sound.playMusic(Paths.music('freakyMenu'));
 							FlxG.switchState(new MainMenuState());
-							Main.cleanCache();
+							
 						}
 	
 						#if cpp
@@ -3335,7 +3339,7 @@ class PlayState extends MusicBeatState
 				else
 				{
 					FlxG.switchState(new FreeplayState());
-					Main.cleanCache();
+					
 				}
 			}
 		}

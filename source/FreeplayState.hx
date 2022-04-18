@@ -46,6 +46,9 @@ class FreeplayState extends MusicBeatState
 
 	override function create()
 	{
+		Main.clearMemory(false);
+		Main.clearMemory(true);
+
 		if (FlxG.save.data.pacifistEnding && FlxG.save.data.genocideEnding && !FlxG.save.data.unlockedWoundedShooting)
 			FlxG.save.data.unlockedWoundedShooting = true;
 
@@ -237,7 +240,7 @@ class FreeplayState extends MusicBeatState
 		if (controls.BACK && ableToPress)
 		{
 			FlxG.switchState(new MainMenuState());
-			Main.cleanCache();
+			
 		}
 
 		if (FlxG.keys.justPressed.P && ableToPress)

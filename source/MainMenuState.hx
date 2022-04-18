@@ -52,6 +52,9 @@ class MainMenuState extends MusicBeatState
 
 	override function create()
 	{
+		Main.clearMemory(false);
+		Main.clearMemory(true);
+
 		#if windows
 		// Updating Discord Rich Presence
 		DiscordClient.changePresence("In the Menus", null);
@@ -228,7 +231,7 @@ class MainMenuState extends MusicBeatState
 				if (optionShit[curSelected] == '')
 				{
 					FlxG.switchState(new CreditState());
-					Main.cleanCache();
+					
 				}
 				else
 				{
@@ -282,20 +285,20 @@ class MainMenuState extends MusicBeatState
 		{
 			case 'story':
 				FlxG.switchState(new StoryMenuState());
-				Main.cleanCache();
+				
 				trace("Story Menu Selected");
 			case 'freeplay':
 				FlxG.switchState(new FreeplayState());
-				Main.cleanCache();
+				
 				trace("Freeplay Menu Selected");
 			case 'credits':
 				FlxG.switchState(new CreditState());
-				Main.cleanCache();
+				
 				trace("Credits Menu Selected");
 
 			case 'options':
 				FlxG.switchState(new OptionsMenu());
-				Main.cleanCache();
+				
 		}
 	}
 
