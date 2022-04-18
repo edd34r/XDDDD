@@ -129,10 +129,10 @@ class AndroidControls extends FlxSpriteGroup
 							add(vpad);					
 					}
 				case 2:
-					hbox = new FlxHitbox(FIVE, 0.75, true);
+					hbox = new FlxHitbox(FIVE_UP, 0.75, true);
 					add(hbox);
 				case 3:
-					hbox = new FlxHitbox(FIVE_UP, 0.75, true);
+					hbox = new FlxHitbox(FIVE, 0.75, true);
 					add(hbox);
 			}
 		}
