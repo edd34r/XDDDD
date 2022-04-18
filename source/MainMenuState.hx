@@ -52,8 +52,8 @@ class MainMenuState extends MusicBeatState
 
 	override function create()
 	{
-		Main.clearMemory(false);
-		Main.clearMemory(true);
+		SUtil.clearMemory(false);
+		SUtil.clearMemory(true);
 
 		#if windows
 		// Updating Discord Rich Presence
