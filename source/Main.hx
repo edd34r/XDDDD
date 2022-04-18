@@ -103,6 +103,7 @@ class Main extends Sprite
 			}
 		}
 		Assets.cache.clear("songs");
+		openfl.system.System.gc();
 	}
 
 
