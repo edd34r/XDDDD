@@ -57,16 +57,6 @@ class MusicBeatState extends FlxUIState
 	public function addAndroidControls() {
 		androidc = new AndroidControls();
 
-		if (PlayState.SONG.song.toLowerCase() == 'anthropophobia' && FlxG.save.data.dcontrol == 1)
-		{
-
-		}
-                else
-		{
-			controls.setHitBox(androidc.hbox);
-		}
-
-
 		if (PlayState.SONG.song.toLowerCase() == 'anthropophobia')
 		{
 			switch(FlxG.save.data.dcontrol) {
