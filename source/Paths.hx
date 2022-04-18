@@ -13,8 +13,6 @@ using StringTools;
 
 class Paths
 {
-        public static var currentTrackedSounds:Map<String, Sound> = [];
-        public static var currentTrackedAssets:Map<String, FlxGraphic> = [];
 	inline public static var SOUND_EXT = #if web "mp3" #else "ogg" #end;
 
 	static var currentLevel:String;
@@ -207,6 +205,7 @@ class Paths
 		return FlxAtlasFrames.fromSpriteSheetPacker(image(key, library), file('images/$key.txt', library));
 	}
 
+        public static var currentTrackedAssets:Map<String, FlxGraphic> = [];
 	public static function returnGraphic(key:String, ?library:String) {
 		var path = getPath('images/$key.png', IMAGE, library);
 		if (OpenFlAssets.exists(path, IMAGE)) {
@@ -220,10 +219,10 @@ class Paths
 		return null;
 	}
 
+        public static var currentTrackedSounds:Map<String, Sound> = [];
 	public static function returnSound(path:String, key:String, ?library:String) {
 		var gottenPath:String = getPath('$path/$key.$SOUND_EXT', SOUND, library);	
 		gottenPath = gottenPath.substring(gottenPath.indexOf(':') + 1, gottenPath.length);
-		// trace(gottenPath);
 		if(!currentTrackedSounds.exists(gottenPath)) 
 			currentTrackedSounds.set(gottenPath, OpenFlAssets.getSound(getPath('$path/$key.$SOUND_EXT', SOUND, library)));
 		localTrackedAssets.push(gottenPath);
