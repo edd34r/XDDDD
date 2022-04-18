@@ -314,7 +314,7 @@ class PlayState extends MusicBeatState
 
 	override public function create()
 	{
-		SUtil.clearMemory(true);
+		SUtil.clearMemory(false);
 
 		instance = this;
 		attackedSans = false;
@@ -1522,7 +1522,7 @@ class PlayState extends MusicBeatState
 
 		super.create();
 
-		SUtil.clearMemory(false);
+		SUtil.clearMemory(true);
 	}
 
 	function playCutscene(videoPlaying:String,dialogueBox:DialogueBox):Void
