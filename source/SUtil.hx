@@ -155,9 +155,12 @@ class SUtil
     }
 
     public static var persistentAssets:Array<FlxGraphic> = [];
+    public static var clearOneTime:Bool = false;
 
     public static function clearMemory(?cleanUnused:Bool = false)
     {
+        if (!clearOneTime)
+        {
         trace('deleted cacheeeeeeeeeeee');
         // credits to shubs and haya for this code
         @:privateAccess
@@ -192,6 +195,8 @@ class SUtil
         else if (!cleanUnused)
         {
             Assets.cache.clear("songs");
+        }
+            clearOneTime = true;
         }
     }
 }
