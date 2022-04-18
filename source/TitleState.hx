@@ -49,9 +49,6 @@ class TitleState extends MusicBeatState
 
 	override public function create():Void
 	{
-		Paths.clearStoredMemory();
-		Paths.clearUnusedMemory();
-
 		#if android
 		FlxG.android.preventDefaultKeys = [BACK];
 		#end
@@ -293,7 +290,8 @@ class TitleState extends MusicBeatState
 
 			new FlxTimer().start(2, function(tmr:FlxTimer)
 			{
-				FlxG.switchState(new MainMenuState());			
+				FlxG.switchState(new MainMenuState());	
+				Main.cleanCache();		
 			});
 		}
 

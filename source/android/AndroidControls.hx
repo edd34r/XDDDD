@@ -106,28 +106,28 @@ class AndroidControls extends FlxSpriteGroup
 		{
 			switch(FlxG.save.data.dcontrol) {
 				case 1:
-		switch (vpadMode)
-		{
-			case 0:
-				vpad = new FlxVirtualPad(RIGHT_FULL, NONE, 0.75, true);	
-				add(vpad);						
-			case 1:
-				vpad = new FlxVirtualPad(FULL, NONE, 0.75, true);
-				add(vpad);			
-			case 2:
-				vpad = new FlxVirtualPad(FULL, NONE, 0.75, true);
-				vpad = config.loadcustom(vpad);
-				add(vpad);	
-			case 3:
-				vpad = new FlxVirtualPad(DUO, NONE, 0.75, true);
-				add(vpad);		
-			case 4:
-				hbox = new FlxHitbox(NORMAL, 0.75, true);
-				add(hbox);
-			default:
-				vpad = new FlxVirtualPad(RIGHT_FULL, NONE, 0.75, true);	
-				add(vpad);					
-		}
+					switch (vpadMode)
+					{
+						case 0:
+							vpad = new FlxVirtualPad(RIGHT_FULL, NONE, 0.75, true);	
+							add(vpad);						
+						case 1:
+							vpad = new FlxVirtualPad(FULL, NONE, 0.75, true);
+							add(vpad);			
+						case 2:
+							vpad = new FlxVirtualPad(FULL, NONE, 0.75, true);
+							vpad = config.loadcustom(vpad);
+							add(vpad);	
+						case 3:
+							vpad = new FlxVirtualPad(DUO, NONE, 0.75, true);
+							add(vpad);		
+						case 4:
+							hbox = new FlxHitbox(NORMAL, 0.75, true);
+							add(hbox);
+						default:
+							vpad = new FlxVirtualPad(RIGHT_FULL, NONE, 0.75, true);	
+							add(vpad);					
+					}
 				case 2:
 					hbox = new FlxHitbox(FIVE, 0.75, true);
 					add(hbox);
@@ -138,28 +138,28 @@ class AndroidControls extends FlxSpriteGroup
 		}
 		else
 		{
-		switch (vpadMode)
-		{
-			case 0:
-				vpad = new FlxVirtualPad(RIGHT_FULL, NONE, 0.75, true);	
-				add(vpad);						
-			case 1:
-				vpad = new FlxVirtualPad(FULL, NONE, 0.75, true);
-				add(vpad);			
-			case 2:
-				vpad = new FlxVirtualPad(FULL, NONE, 0.75, true);
-				vpad = config.loadcustom(vpad);
-				add(vpad);	
-			case 3:
-				vpad = new FlxVirtualPad(DUO, NONE, 0.75, true);
-				add(vpad);		
-			case 4:
-				hbox = new FlxHitbox(NORMAL, 0.75, true);
-				add(hbox);
-			default:
-				vpad = new FlxVirtualPad(RIGHT_FULL, NONE, 0.75, true);	
-				add(vpad);					
-		}
+			switch (vpadMode)
+			{
+				case 0:
+					vpad = new FlxVirtualPad(RIGHT_FULL, NONE, 0.75, true);	
+					add(vpad);						
+				case 1:
+					vpad = new FlxVirtualPad(FULL, NONE, 0.75, true);
+					add(vpad);			
+				case 2:
+					vpad = new FlxVirtualPad(FULL, NONE, 0.75, true);
+					vpad = config.loadcustom(vpad);
+					add(vpad);	
+				case 3:
+					vpad = new FlxVirtualPad(DUO, NONE, 0.75, true);
+					add(vpad);		
+				case 4:
+					hbox = new FlxHitbox(NORMAL, 0.75, true);
+					add(hbox);
+				default:
+					vpad = new FlxVirtualPad(RIGHT_FULL, NONE, 0.75, true);	
+					add(vpad);					
+			}
 		}
 	}
 

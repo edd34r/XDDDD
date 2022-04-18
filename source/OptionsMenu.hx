@@ -130,7 +130,10 @@ class OptionsMenu extends MusicBeatState
 		if (acceptInput)
 		{
 			if (controls.BACK && !isCat)
+			{
 				FlxG.switchState(new MainMenuState());
+				Main.cleanCache();
+			}
 			else if (controls.BACK)
 			{
 				isCat = false;
@@ -247,6 +250,7 @@ class OptionsMenu extends MusicBeatState
 			if (_virtualpad.buttonC.justPressed)
 			{
 				FlxG.switchState(new android.AndroidControlsMenu());
+				Main.cleanCache();
 			}
 			#end
 		}

@@ -49,6 +49,7 @@ class EndingState extends MusicBeatState
         if (controls.ACCEPT)
         {
             FlxG.switchState(new MainMenuState());
+            Main.cleanCache();
         }
     }
 }

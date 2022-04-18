@@ -197,9 +197,13 @@ class ResultsScreen extends MusicBeatSubstate
             {
                 FlxG.sound.playMusic(Paths.music('freakyMenu'));
                 FlxG.switchState(new MainMenuState());
+                Main.cleanCache();
             }
             else
+            {
                 FlxG.switchState(new FreeplayState());
+                Main.cleanCache();
+            }
         }
 
         if (FlxG.keys.justPressed.F1 #if android || _virtualpad.buttonB.justPressed #end)
