@@ -2330,11 +2330,12 @@ class PlayState extends MusicBeatState
 		if (SONG.song.toLowerCase() == 'anthropophobia')
 		{
 			var buttonS:Bool = false;
-			
-			if (FlxG.save.data.dcontrol != 1) {
-				buttonS = androidc.hbox.buttonSpace.justPressed;
-			} else {
-				buttonS = _virtualpad.buttonD.justPressed;
+
+			switch(FlxG.save.data.dcontrol) {
+				case 1:
+					buttonS = _virtualpad.buttonD.justPressed;
+				case 2 | 3:
+					buttonS = androidc.hbox.buttonSpace.justPressed;
 			}
 
 			if (FlxG.keys.justPressed.SPACE #if android || buttonS #end)

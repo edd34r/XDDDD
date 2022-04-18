@@ -59,20 +59,44 @@ class MusicBeatState extends FlxUIState
 
 		if (PlayState.SONG.song.toLowerCase() == 'anthropophobia' && FlxG.save.data.dcontrol == 1)
 		{
-		switch (androidc.mode)
-		{
-			case VIRTUALPAD_RIGHT | VIRTUALPAD_LEFT | VIRTUALPAD_CUSTOM:
-				controls.setVirtualPad(androidc.vpad, FULL, NONE);
-			case DUO:
-				controls.setVirtualPad(androidc.vpad, DUO, NONE);
-			case HITBOX:
-				controls.setHitBox(androidc.hbox);
-			default:
-		}
+
 		}
                 else
 		{
 			controls.setHitBox(androidc.hbox);
+		}
+
+
+		if (PlayState.SONG.song.toLowerCase() == 'anthropophobia')
+		{
+			switch(FlxG.save.data.dcontrol) {
+				case 1:
+					switch (androidc.mode)
+					{
+						case VIRTUALPAD_RIGHT | VIRTUALPAD_LEFT | VIRTUALPAD_CUSTOM:
+							controls.setVirtualPad(androidc.vpad, FULL, NONE);
+						case DUO:
+							controls.setVirtualPad(androidc.vpad, DUO, NONE);
+						case HITBOX:
+							controls.setHitBox(androidc.hbox);
+						default:
+					}
+				case 2 | 3:
+					controls.setHitBox(androidc.hbox);
+			}
+		}
+		else
+		{
+			switch (androidc.mode)
+			{
+				case VIRTUALPAD_RIGHT | VIRTUALPAD_LEFT | VIRTUALPAD_CUSTOM:
+					controls.setVirtualPad(androidc.vpad, FULL, NONE);
+				case DUO:
+					controls.setVirtualPad(androidc.vpad, DUO, NONE);
+				case HITBOX:
+					controls.setHitBox(androidc.hbox);
+				default:
+			}
 		}
 
 		trackedinputs = controls.trackedinputs;
