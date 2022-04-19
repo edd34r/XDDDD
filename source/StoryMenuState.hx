@@ -63,8 +63,7 @@ class StoryMenuState extends MusicBeatState
 
 	override function create()
 	{
-		SUtil.clearMemory(false);
-		SUtil.clearMemory(true);
+
 
 		#if windows
 		// Updating Discord Rich Presence

@@ -72,7 +72,7 @@ class ResultsScreen extends MusicBeatSubstate
             text.text = "Week Cleared!";
         }
 
-        comboText = new FlxText(20,-75,0,'Judgements:\nSicks - ${PlayState.sicks}\nGoods - ${PlayState.goods}\nBads - ${PlayState.bads}\n\nCombo Breaks: ${(PlayState.isStoryMode ? PlayState.campaignMisses : PlayState.misses)}\nHighest Combo: ${PlayState.highestCombo + 1}\n\nScore: ${PlayState.instance.songScore}\nAccuracy: ${HelperFunctions.truncateFloat(PlayState.instance.accuracy,2)}%\n\n${Ratings.GenerateLetterRank(PlayState.instance.accuracy)}\n\nF1 / B - View replay\nF2 / C - Replay song
+        comboText = new FlxText(20,-75,0,'Judgements:\nSicks - ${PlayState.sicks}\nGoods - ${PlayState.goods}\nBads - ${PlayState.bads}\n\nCombo Breaks: ${(PlayState.isStoryMode ? PlayState.campaignMisses : PlayState.misses)}\nHighest Combo: ${PlayState.highestCombo + 1}\n\nScore: ${PlayState.instance.songScore}\nAccuracy: ${HelperFunctions.truncateFloat(PlayState.instance.accuracy,2)}%\n\n${Ratings.GenerateLetterRank(PlayState.instance.accuracy)}\n\nF1 / B - Replay song
         ');
         comboText.size = 28;
         comboText.setBorderStyle(FlxTextBorderStyle.OUTLINE,FlxColor.BLACK,4,1);
@@ -158,7 +158,7 @@ class ResultsScreen extends MusicBeatSubstate
         cameras = [FlxG.cameras.list[FlxG.cameras.list.length - 1]];
 
         #if android
-        addVirtualPad(NONE, A_B_C);
+        addVirtualPad(NONE, A_B);
         addPadCamera();
         #end
 
@@ -208,58 +208,20 @@ class ResultsScreen extends MusicBeatSubstate
 
         if (FlxG.keys.justPressed.F1 #if android || _virtualpad.buttonB.justPressed #end)
         {
-            trace(PlayState.rep.path);
-            PlayState.rep = Replay.LoadReplay(PlayState.rep.path);
-
-            PlayState.loadRep = true;
-
-            var songFormat = StringTools.replace(PlayState.rep.replay.songName, " ", "-");
-            switch (songFormat) {
-                case 'Dad-Battle': songFormat = 'Dadbattle';
-                case 'Philly-Nice': songFormat = 'Philly';
-                    // Replay v1.0 support
-                case 'dad-battle': songFormat = 'Dadbattle';
-                case 'philly-nice': songFormat = 'Philly';
-            }
-
-			var songHighscore = StringTools.replace(PlayState.SONG.song, " ", "-");
-			switch (songHighscore) {
-				case 'Dad-Battle': songHighscore = 'Dadbattle';
-				case 'Philly-Nice': songHighscore = 'Philly';
-			}
-
-			#if !switch
-			Highscore.saveScore(songHighscore, Math.round(PlayState.instance.songScore), PlayState.storyDifficulty);
-			Highscore.saveCombo(songHighscore, Ratings.GenerateLetterRank(PlayState.instance.accuracy),PlayState.storyDifficulty);
-			#end
-
-            var poop:String = Highscore.formatSong(songFormat, PlayState.rep.replay.songDiff);
-
-            music.fadeOut(0.3);
-
-            PlayState.SONG = Song.loadFromJson(poop, PlayState.rep.replay.songName);
-            PlayState.isStoryMode = false;
-            PlayState.storyDifficulty = PlayState.rep.replay.songDiff;
-            PlayState.storyWeek = 0;
-            LoadingState.loadAndSwitchState(new PlayState());
-        }
-
-        if (FlxG.keys.justPressed.F2 #if android || _virtualpad.buttonC.justPressed #end)
-        {
             PlayState.rep = null;
 
             PlayState.loadRep = false;
 
-			var songHighscore = StringTools.replace(PlayState.SONG.song, " ", "-");
-			switch (songHighscore) {
-				case 'Dad-Battle': songHighscore = 'Dadbattle';
-				case 'Philly-Nice': songHighscore = 'Philly';
-			}
+            var songHighscore = StringTools.replace(PlayState.SONG.song, " ", "-");
+            switch (songHighscore) {
+                case 'Dad-Battle': songHighscore = 'Dadbattle';
+                case 'Philly-Nice': songHighscore = 'Philly';
+            }
 
-			#if !switch
-			Highscore.saveScore(songHighscore, Math.round(PlayState.instance.songScore), PlayState.storyDifficulty);
-			Highscore.saveCombo(songHighscore, Ratings.GenerateLetterRank(PlayState.instance.accuracy),PlayState.storyDifficulty);
-			#end
+            #if !switch
+            Highscore.saveScore(songHighscore, Math.round(PlayState.instance.songScore), PlayState.storyDifficulty);
+            Highscore.saveCombo(songHighscore, Ratings.GenerateLetterRank(PlayState.instance.accuracy),PlayState.storyDifficulty);
+            #end
 
             var songFormat = StringTools.replace(PlayState.SONG.song, " ", "-");
             switch (songFormat) {
@@ -281,6 +243,5 @@ class ResultsScreen extends MusicBeatSubstate
         }
 
 		super.update(elapsed);
-		
 	}
 }

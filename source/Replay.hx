@@ -1,6 +1,3 @@
-#if sys
-import sys.io.File;
-#end
 import Controls.Control;
 import flixel.FlxG;
 import openfl.events.IOErrorEvent;
@@ -102,32 +99,11 @@ class Replay
 		var data:String = Json.stringify(json);
 		
 		var time = Date.now().getTime();
-
-		#if sys
-		File.saveContent(SUtil.getPath() + "assets/replays/replay-" + PlayState.SONG.song + "-time" + time + ".kadeReplay", data);
-
-		path = "replay-" + PlayState.SONG.song + "-time" + time + ".kadeReplay"; // for score screen shit
-
-		LoadFromJSON();
-
-		replay.ana = ana;
-		#end
 	}
 
 	public function LoadFromJSON()
 	{
-		#if sys
-		trace('loading ' + SUtil.getPath() + 'assets/replays/' + path + ' replay...');
-		try
-		{
-			var repl:ReplayJSON = cast Json.parse(File.getContent(SUtil.getPath() + "assets/replays/" + path));
-			replay = repl;
-		}
-		catch(e)
-		{
-			trace('failed!\n' + e.message);
-		}
-		#end
+		// nothing
 	}
 
 }

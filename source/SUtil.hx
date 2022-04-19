@@ -135,7 +135,7 @@ class SUtil
         Sys.println("Crash dump saved in " + Path.normalize(path));
         Sys.println("Making a simple alert ...");
 
-        SUtil.applicationAlert("Uncaught Error, The Call Stack: ", errMsg);
+        SUtil.applicationAlert("Uncaught Error :(, The Call Stack: ", errMsg);
         flash.system.System.exit(0);
     }
 	
@@ -152,14 +152,6 @@ class SUtil
         #if android
         SUtil.applicationAlert("Done Action: ", "File Saved Successfully!");
         #end
-    }
-
-    public static var persistentAssets:Array<FlxGraphic> = [];
-    public static var clearOneTime:Bool = false;
-
-    public static function clearMemory(?cleanUnused:Bool = false)
-    {
-        
     }
 }
 
