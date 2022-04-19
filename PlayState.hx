@@ -280,7 +280,7 @@ class PlayState extends MusicBeatState
 	var curcol:FlxColor;
 	var curcol2:FlxColor;
 	var col:Array<FlxColor> = [
-		0xFF51d8fb, // BF
+		0xFF000099, // BF
 		0xFFca1f6f, // GF
 		0xFFc885e5, // DAD
 		0xFF999999,	// SANS
